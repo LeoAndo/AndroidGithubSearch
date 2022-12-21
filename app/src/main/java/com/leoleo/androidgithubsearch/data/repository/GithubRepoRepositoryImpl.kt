@@ -8,8 +8,9 @@ import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-class GithubRepoRepositoryImpl(
+class GithubRepoRepositoryImpl @Inject constructor(
     private val api: GithubService,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : GithubRepoRepository {

@@ -36,11 +36,11 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(debug: Boolean = BuildConfig.DEBUG): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
-        if (debug) {
+        if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor =
                 HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT).apply {
                     level = HttpLoggingInterceptor.Level.BODY
