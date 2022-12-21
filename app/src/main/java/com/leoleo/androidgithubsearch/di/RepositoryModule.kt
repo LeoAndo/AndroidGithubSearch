@@ -1,7 +1,7 @@
 package com.leoleo.androidgithubsearch.di
 
-import com.leoleo.androidgithubsearch.data.repository.GithubRepositoryImpl
-import com.leoleo.androidgithubsearch.domain.repository.GithubRepository
+import com.leoleo.androidgithubsearch.data.repository.GithubRepoRepositoryImpl
+import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class RepositoryModule {
+abstract class RepositoryModule {
     @Binds
-    abstract fun bindGithubRepository(impl: GithubRepositoryImpl): GithubRepository
+    abstract fun bindGithubRepoRepository(impl: GithubRepoRepositoryImpl): GithubRepoRepository
 }

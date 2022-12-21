@@ -4,8 +4,8 @@ import javax.inject.Qualifier
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-internal annotation class IoDispatcher
+annotation class IoDispatcher
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-internal annotation class DefaultDispatcher
+annotation class DefaultDispatcher

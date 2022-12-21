@@ -6,13 +6,13 @@ import com.leoleo.androidgithubsearch.data.dataOrThrow
 import com.leoleo.androidgithubsearch.di.IoDispatcher
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
-import com.leoleo.androidgithubsearch.domain.repository.GithubRepository
+import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 
-class GithubRepositoryImpl(
+class GithubRepoRepositoryImpl(
     private val api: GithubService,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-) : GithubRepository {
+) : GithubRepoRepository {
     override suspend fun searchRepositories(query: String, page: Int): List<RepositorySummary> =
         dataOrThrow(dispatcher) { api.searchRepositories(query, page).toModel() }
 

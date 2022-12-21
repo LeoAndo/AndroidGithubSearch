@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-internal object ApiModule {
+object ApiModule {
     private const val TIMEOUT_SEC: Long = 30
 
     @Singleton
