@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,11 +24,27 @@ object ApiModule {
     @Singleton
     @Provides
     fun provideGithubService(
-        okHttpClient: OkHttpClient,
+        okHttpClientBuilder: OkHttpClient.Builder,
         moshi: Moshi,
     ): GithubService {
+        val okhttpClient = okHttpClientBuilder.apply {
+            addInterceptor(Interceptor { chain ->
+                val request = chain.request()
+                val requestBuilder = request.newBuilder()
+                val originalUrl = request.url.toString()
+                if (originalUrl.contains(BuildConfig.GITHUB_API_DOMAIN)) {
+                    requestBuilder.addHeader("Accept", "application/vnd.github+json")
+                    requestBuilder.addHeader(
+                        "Authorization",
+                        "Bearer ${BuildConfig.GITHUB_ACCESS_TOKEN}"
+                    )
+                    requestBuilder.addHeader("X-GitHub-Api-Version", "2022-11-28")
+                }
+                chain.proceed(requestBuilder.build())
+            })
+        }.build()
         return Retrofit.Builder()
-            .client(okHttpClient)
+            .client(okhttpClient)
             .baseUrl(BuildConfig.GITHUB_API_DOMAIN)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -36,7 +53,7 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
@@ -47,7 +64,7 @@ object ApiModule {
                 }
             builder.addInterceptor(httpLoggingInterceptor)
         }
-        return builder.build()
+        return builder
     }
 
     @Singleton

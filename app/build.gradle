@@ -5,6 +5,16 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+def localProperties = new Properties()
+try {
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+    if (!localProperties['GITHUB_ACCESS_TOKEN']) {
+        logger.warn('Add the GITHUB_ACCESS_TOKEN to your local.properties. \n Example: GITHUB_ACCESS_TOKEN = xxx')
+    }
+} catch (Exception e) {
+    logger.warn("Not Found local.properties: ${e.localizedMessage}")
+}
+
 android {
     namespace 'com.leoleo.androidgithubsearch'
     compileSdk 33
@@ -20,6 +30,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        buildConfigField("String", "GITHUB_ACCESS_TOKEN", "\"" + localProperties['GITHUB_ACCESS_TOKEN'] + "\"")
         buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
     }
 
