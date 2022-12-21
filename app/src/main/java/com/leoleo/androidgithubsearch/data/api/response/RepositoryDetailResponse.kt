@@ -40,7 +40,7 @@ data class RepositoryDetailResponse(
     val has_pages: Boolean,
     val has_projects: Boolean,
     val has_wiki: Boolean,
-    val homepage: String,
+    val homepage: String?,
     val hooks_url: String,
     val html_url: String,
     val id: Int,
@@ -50,9 +50,9 @@ data class RepositoryDetailResponse(
     val issues_url: String,
     val keys_url: String,
     val labels_url: String,
-    val language: String,
+    val language: String?,
     val languages_url: String,
-    val license: License,
+    val license: License?,
     val merges_url: String,
     val milestones_url: String,
     val mirror_url: String?,
@@ -94,7 +94,7 @@ data class RepositoryDetailResponse(
         val name: String,
         val node_id: String,
         val spdx_id: String,
-        val url: String
+        val url: String?
     )
 
     data class Organization(

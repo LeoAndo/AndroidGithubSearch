@@ -7,5 +7,5 @@ data class RepositoryDetail(
     val forksCount: Int,
     val openIssuesCount: Int,
     val subscribersCount: Int,
-    val language: String,
+    val language: String?,
 )
