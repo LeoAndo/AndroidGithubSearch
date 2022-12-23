@@ -24,6 +24,10 @@ class SearchViewModel @Inject constructor(
 
     fun searchRepositories(query: String, page: Int) {
         viewModelScope.launch(coroutineExceptionHandler) {
+            if (query.isEmpty()) {
+                uiState = SearchUiState.Error("Please input repository name")
+                return@launch
+            }
             uiState = SearchUiState.Loading
             val result = repository.searchRepositories(query, 1)
             uiState = if (result.isNotEmpty()) {
