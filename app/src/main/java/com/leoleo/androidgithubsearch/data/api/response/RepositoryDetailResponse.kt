@@ -21,7 +21,7 @@ data class RepositoryDetailResponse(
     val created_at: String,
     val default_branch: String,
     val deployments_url: String,
-    val description: String,
+    val description: String?,
     val disabled: Boolean,
     val downloads_url: String,
     val events_url: String,
