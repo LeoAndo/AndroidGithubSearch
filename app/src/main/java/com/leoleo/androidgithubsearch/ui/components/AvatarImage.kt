@@ -41,7 +41,6 @@ fun AvatarImage(
             contentDescription = contentDescription,
             modifier = Modifier
                 .fillMaxSize(),
-            //.padding(8.dp),
             contentScale = ContentScale.Crop,
         )
     }
