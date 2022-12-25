@@ -1,7 +1,6 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.squareup.moshi.Json
 
 data class RepositoryDetailResponse(
@@ -62,7 +61,7 @@ data class RepositoryDetailResponse(
     val notifications_url: String,
     val open_issues: Int,
     val open_issues_count: Int,
-    val organization: Organization,
+    val organization: Organization?,
     val owner: Owner,
     @Json(name = "private") val isPrivate: Boolean,
     val pulls_url: String,
@@ -142,12 +141,12 @@ data class RepositoryDetailResponse(
 
 fun RepositoryDetailResponse.toModel(): RepositoryDetail {
     return RepositoryDetail(
-        name = this.full_name,
+        name = this.name,
         ownerAvatarUrl = this.owner.avatar_url,
-        stargazersCount = this.stargazers_count,
-        forksCount = this.forks_count,
-        openIssuesCount = this.open_issues_count,
-        subscribersCount = this.subscribers_count,
+        stargazersCount = this.stargazers_count.toString(),
+        forksCount = this.forks_count.toString(),
+        openIssuesCount = this.open_issues_count.toString(),
+        subscribersCount = this.subscribers_count.toString(),
         language = this.language,
     )
 }

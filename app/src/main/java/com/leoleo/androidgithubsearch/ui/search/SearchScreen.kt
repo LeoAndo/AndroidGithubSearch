@@ -17,11 +17,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leoleo.androidgithubsearch.R
+import com.leoleo.androidgithubsearch.data.ErrorResult
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.ui.components.AppAlertDialog
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
 import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
+import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
 fun SearchScreen(
@@ -68,6 +71,35 @@ private fun SearchScreenStateless(
             modifier = Modifier.fillMaxWidth(),
         )
         when (uiState) {
+            SearchUiState.Initial -> {}
+            SearchUiState.Loading -> LoadingFullScreen()
+            SearchUiState.Empty -> ErrorFullScreen(
+                message = stringResource(id = R.string.empty_message),
+                onReload = { onSearch() },
+            )
+            is SearchUiState.Error -> {
+                val throwable = uiState.throwable
+                val message = throwable.localizedMessage
+                    ?: stringResource(id = R.string.default_error_message)
+                if (throwable is ErrorResult) {
+                    when (throwable) {
+                        is ErrorResult.UnAuthorizedError -> {
+                            ErrorFullScreen(message = message, onReload = { onSearch() })
+                            AppAlertDialog(
+                                titleText = message,
+                                messageText = stringResource(id = R.string.unauthorized_message),
+                                confirmText = stringResource(id = android.R.string.ok),
+                            )
+                        }
+                        is ErrorResult.BadRequestError, is ErrorResult.NetworkError, is ErrorResult.NotFoundError,
+                        is ErrorResult.UnexpectedError -> {
+                            ErrorFullScreen(message = message, onReload = { onSearch() })
+                        }
+                    }
+                } else {
+                    ErrorFullScreen(message = message, onReload = { onSearch() })
+                }
+            }
             is SearchUiState.Data -> {
                 Spacer(modifier = Modifier.size(20.dp))
                 LazyColumn(content = {
@@ -101,17 +133,6 @@ private fun SearchScreenStateless(
                     }
                 })
             }
-            is SearchUiState.Error -> ErrorFullScreen(
-                message = uiState.message,
-                onReload = { onSearch() },
-            )
-            SearchUiState.Loading -> LoadingFullScreen()
-            SearchUiState.Empty -> ErrorFullScreen(
-                message = stringResource(id = R.string.empty_message),
-                onReload = { onSearch() },
-            )
-            SearchUiState.Initial -> {}
-
         }
     }
 }
@@ -120,73 +141,83 @@ private fun SearchScreenStateless(
 @Composable
 private fun Prev_Success_SearchScreen() {
     val data = buildList {
-        (0..20).forEach {
+        repeat(20) {
             add(
                 RepositorySummary(
-                    "android-compose $it",
-                    "google"
+                    ownerName = "google $it",
+                    name = "android-compose"
                 )
             )
         }
     }
-    SearchScreenStateless(
-        uiState = SearchUiState.Data(data),
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        query = "android-compose",
-        onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
-    )
+    AndroidGithubSearchTheme {
+        SearchScreenStateless(
+            uiState = SearchUiState.Data(data),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            query = "android-compose",
+            onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
+        )
+    }
 }
 
 @PreviewPhoneDevice
 @Composable
 private fun Prev_Error_SearchScreen() {
-    SearchScreenStateless(
-        uiState = SearchUiState.Error(message = "error!!"),
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        query = "android-compose",
-        onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
-    )
+    AndroidGithubSearchTheme {
+        SearchScreenStateless(
+            uiState = SearchUiState.Error(IllegalStateException("error!!")),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            query = "android-compose",
+            onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
+        )
+    }
 }
 
 @PreviewPhoneDevice
 @Composable
 private fun Prev_Loading_SearchScreen() {
-    SearchScreenStateless(
-        uiState = SearchUiState.Loading,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        query = "android-compose",
-        onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
-    )
+    AndroidGithubSearchTheme {
+        SearchScreenStateless(
+            uiState = SearchUiState.Loading,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            query = "android-compose",
+            onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
+        )
+    }
 }
 
 @PreviewPhoneDevice
 @Composable
 private fun Prev_Initial_SearchScreen() {
-    SearchScreenStateless(
-        uiState = SearchUiState.Initial,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        query = "android-compose",
-        onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
-    )
+    AndroidGithubSearchTheme {
+        SearchScreenStateless(
+            uiState = SearchUiState.Initial,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            query = "android-compose",
+            onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
+        )
+    }
 }
 
 @PreviewPhoneDevice
 @Composable
 private fun Prev_Empty_SearchScreen() {
-    SearchScreenStateless(
-        uiState = SearchUiState.Empty,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        query = "android-compose",
-        onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
-    )
+    AndroidGithubSearchTheme {
+        SearchScreenStateless(
+            uiState = SearchUiState.Empty,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            query = "android-compose",
+            onValueChange = {}, onSearch = {}, onClickCardItem = { _, _ -> },
+        )
+    }
 }

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
+import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
 fun LoadingFullScreen(modifier: Modifier = Modifier) {
@@ -22,5 +23,7 @@ fun LoadingFullScreen(modifier: Modifier = Modifier) {
 @PreviewDevices
 @Composable
 private fun Prev_LoadingFullScreen() {
-    LoadingFullScreen()
+    AndroidGithubSearchTheme {
+        LoadingFullScreen()
+    }
 }
