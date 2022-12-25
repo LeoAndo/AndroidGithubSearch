@@ -75,7 +75,7 @@ private fun DetailScreenStateless(
                     AvatarImage(
                         imageUrl = data.ownerAvatarUrl,
                         contentDescription = stringResource(R.string.content_description_owner_avatar_icon),
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(60.dp)
                     )
                     Spacer(modifier = Modifier.size(12.dp))
                     Text(text = data.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
