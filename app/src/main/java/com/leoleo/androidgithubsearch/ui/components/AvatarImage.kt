@@ -28,21 +28,20 @@ fun AvatarImage(
 ) {
     Surface(
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f),
         modifier = modifier,
     ) {
         Image(
             painter = rememberImagePainter(
                 data = imageUrl,
                 builder = {
-                    crossfade(500)
+                    crossfade(true)
                     placeholder(drawableResId = R.drawable.placeholder_image)
                 }
             ),
             contentDescription = contentDescription,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
+                .fillMaxSize(),
+            //.padding(8.dp),
             contentScale = ContentScale.Crop,
         )
     }
