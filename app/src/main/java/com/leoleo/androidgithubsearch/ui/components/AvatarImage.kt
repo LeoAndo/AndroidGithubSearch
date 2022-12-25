@@ -28,7 +28,7 @@ fun AvatarImage(
 ) {
     Surface(
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+        color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f),
         modifier = modifier,
     ) {
         Image(
