@@ -124,7 +124,7 @@ data class GithubSearchResponse(
 fun GithubSearchResponse.toModel(): List<RepositorySummary> {
     return this.items.map {
         RepositorySummary(
-            name = it.full_name,
+            name = it.name,
             ownerName = it.owner.login,
         )
     }

@@ -16,16 +16,17 @@ class SearchViewModel @Inject constructor(
     private val repository: GithubRepoRepository,
 ) : ViewModel() {
     var uiState by mutableStateOf<SearchUiState>(SearchUiState.Initial)
+        private set
 
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable ->
-            uiState = SearchUiState.Error(throwable.localizedMessage ?: "error")
+            uiState = SearchUiState.Error(throwable)
         }
 
     fun searchRepositories(query: String, page: Int) {
         viewModelScope.launch(coroutineExceptionHandler) {
             if (query.isEmpty()) {
-                uiState = SearchUiState.Error("Please input repository name")
+                uiState = SearchUiState.Error(IllegalStateException("Please input repository name"))
                 return@launch
             }
             uiState = SearchUiState.Loading

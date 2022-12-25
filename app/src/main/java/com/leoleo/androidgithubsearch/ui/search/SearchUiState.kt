@@ -7,6 +7,6 @@ sealed interface SearchUiState {
     object Loading : SearchUiState
     object Empty : SearchUiState
     data class Data(val repoList: List<RepositorySummary>) : SearchUiState
-    data class Error(val message: String) : SearchUiState
+    data class Error(val throwable: Throwable) : SearchUiState
 }
 

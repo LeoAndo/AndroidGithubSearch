@@ -13,11 +13,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.leoleo.androidgithubsearch.ui.GithubRepoSearchDestinations.DetailRoute.ARG_KEY_NAME
+import com.leoleo.androidgithubsearch.ui.GithubRepoSearchDestinations.DetailRoute.ARG_KEY_OWNER_NAME
+import com.leoleo.androidgithubsearch.ui.detail.DetailScreen
 import com.leoleo.androidgithubsearch.ui.search.SearchScreen
 import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MainScreen() {
     AndroidGithubSearchTheme {
         Surface(
             modifier = Modifier
@@ -26,14 +29,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.background
         ) {
             Box(modifier = Modifier.padding(12.dp)) {
-                MyNavigationGraph(startDestination = TopDestinations.SearchRoute.routeName)
+                MyNavHost(startDestination = TopDestinations.SearchRoute.routeName)
             }
         }
     }
 }
 
 @Composable
-private fun MyNavigationGraph(
+private fun MyNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String,
@@ -41,21 +44,21 @@ private fun MyNavigationGraph(
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = modifier
+        modifier = Modifier.fillMaxSize()
     ) {
         // nest navigation
         navigation(
-            startDestination = SearchDestinations.TopRoute.routeName,
+            startDestination = GithubRepoSearchDestinations.TopRoute.routeName,
             route = TopDestinations.SearchRoute.routeName,
         ) {
             composable(
-                route = SearchDestinations.TopRoute.routeName,
+                route = GithubRepoSearchDestinations.TopRoute.routeName,
                 content = {
                     SearchScreen(
                         modifier = modifier,
                         navigateToDetailScreen = { ownerName, name ->
                             navController.navigate(
-                                SearchDestinations.DetailRoute.withArgs(
+                                GithubRepoSearchDestinations.DetailRoute.withArgs(
                                     ownerName,
                                     name,
                                 )
@@ -65,21 +68,25 @@ private fun MyNavigationGraph(
                 }
             )
             composable(
-                route = SearchDestinations.DetailRoute.routeName + "/{ownerName}/{name}",
+                route = GithubRepoSearchDestinations.DetailRoute.routeNameWithArgs,
                 arguments = listOf(
-                    navArgument("ownerName") {
+                    navArgument(ARG_KEY_OWNER_NAME) {
                         type = NavType.StringType
                         nullable = false
                     },
-                    navArgument("name") {
+                    navArgument(ARG_KEY_NAME) {
                         type = NavType.StringType
                         nullable = false
-                    }
+                    },
                 ),
                 content = {
-                    val ownerName = it.arguments?.getString("ownerName") ?: return@composable
-                    val name = it.arguments?.getString("name") ?: return@composable
-                    // TODO: 別イシューにてリポジトリ詳細画面の処理を書く.
+                    val ownerName = it.arguments?.getString(ARG_KEY_OWNER_NAME) ?: return@composable
+                    val name = it.arguments?.getString(ARG_KEY_NAME) ?: return@composable
+                    DetailScreen(
+                        modifier = modifier,
+                        ownerName = ownerName,
+                        name = name,
+                    )
                 }
             )
         }

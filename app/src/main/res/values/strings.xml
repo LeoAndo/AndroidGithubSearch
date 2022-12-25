@@ -3,4 +3,14 @@
     <string name="label_search_keyword">search keyword repository name</string>
     <string name="reload">reload</string>
     <string name="empty_message">search result empty.</string>
+    <string name="page_not_found_message">Not Found Github repository</string>
+    <string name="unauthorized_message">Bad credentials</string>
+    <string name="default_error_message">error.</string>
+    <string name="no_content_description">No contentDescription</string>
+    <string name="content_description_owner_avatar_icon">owner Avatar Icon</string>
+    <string name="stargazers_count">%s Star</string>
+    <string name="forks_count">%s Fork</string>
+    <string name="open_issues_count">%s Issue</string>
+    <string name="subscribers_count">%s Watcher</string>
+    <string name="language">language: %s</string>
 </resources>
