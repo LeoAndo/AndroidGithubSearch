@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.ui.components.AppAlertDialog
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
@@ -16,7 +17,7 @@ import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.data.ErrorResult
-import com.leoleo.androidgithubsearch.ui.components.AvatarImage
+import com.leoleo.androidgithubsearch.ui.components.NetworkImage
 import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
@@ -72,10 +73,11 @@ private fun DetailScreenStateless(
             Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 val data = uiState.repositoryDetail
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    AvatarImage(
+                    NetworkImage(
                         imageUrl = data.ownerAvatarUrl,
                         contentDescription = stringResource(R.string.content_description_owner_avatar_icon),
-                        modifier = Modifier.size(60.dp)
+                        modifier = Modifier.size(60.dp),
+                        transformations = listOf(CircleCropTransformation())
                     )
                     Spacer(modifier = Modifier.size(12.dp))
                     Text(text = data.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
