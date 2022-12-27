@@ -1,12 +1,9 @@
 package com.leoleo.androidgithubsearch.ui
 
-import android.content.Context
-import android.content.res.Resources
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.leoleo.androidgithubsearch.*
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -25,25 +22,32 @@ import com.leoleo.androidgithubsearch.MainActivity
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class SearchScreenTest {
 
-    private lateinit var resources: Resources
-
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+    // The strings used for matching in these tests
+    private lateinit var tagCompactMainScreen: String
+    private lateinit var tagMediumMainScreen: String
+    private lateinit var tagExpandedMainScreen: String
+
     @Before
     fun setUp() {
         hiltRule.inject()
-        resources = ApplicationProvider.getApplicationContext<Context>().resources
+        composeTestRule.activity.apply {
+            tagCompactMainScreen = getString(R.string.test_tag_compact_main_screen)
+            tagMediumMainScreen = getString(R.string.test_tag_medium_main_screen)
+            tagExpandedMainScreen = getString(R.string.test_tag_expanded_main_screen)
+        }
     }
 
     @Test
     fun show_compact_main_screen() {
         composeTestRule.activity.setContent { MainScreen(WindowWidthSizeClass.Compact) }
         with(composeTestRule) {
-            onNodeWithTag(resources.getString(R.string.test_tag_compact_main_screen)).assertIsDisplayed()
+            onNodeWithTag(tagCompactMainScreen).assertIsDisplayed()
         }
     }
 
@@ -51,7 +55,7 @@ class SearchScreenTest {
     fun show_medium_main_screen() {
         composeTestRule.activity.setContent { MainScreen(WindowWidthSizeClass.Medium) }
         with(composeTestRule) {
-            onNodeWithTag(resources.getString(R.string.test_tag_medium_main_screen)).assertIsDisplayed()
+            onNodeWithTag(tagMediumMainScreen).assertIsDisplayed()
         }
     }
 
@@ -59,7 +63,7 @@ class SearchScreenTest {
     fun show_expanded_main_screen() {
         composeTestRule.activity.setContent { MainScreen(WindowWidthSizeClass.Expanded) }
         with(composeTestRule) {
-            onNodeWithTag(resources.getString(R.string.test_tag_expanded_main_screen)).assertIsDisplayed()
+            onNodeWithTag(tagExpandedMainScreen).assertIsDisplayed()
         }
     }
 }
