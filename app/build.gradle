@@ -100,4 +100,7 @@ dependencies {
 
     // Paging
     implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+
+    // responsive UI for larger screens
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 }

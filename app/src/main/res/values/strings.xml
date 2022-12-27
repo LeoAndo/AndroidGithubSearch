@@ -13,4 +13,11 @@
     <string name="open_issues_count">%s Issue</string>
     <string name="subscribers_count">%s Watcher</string>
     <string name="language">language: %s</string>
+    <string name="medium_screen_message">This is Home Screen.</string>
+    <string name="medium_screen_message2">If you want to use the search function of the github repository, tap the Search icon.</string>
+    <string name="medium_screen_message3">If you want to know the developer\'s information, please tap the Face icon.</string>
+    <string name="my_twitter_url">https://twitter.com/Leo99490411Leo</string>
+    <string name="my_instagram_url">https://www.instagram.com/leo.ando100/</string>
+    <string name="my_github_url">https://github.com/LeoAndo</string>
+
 </resources>
