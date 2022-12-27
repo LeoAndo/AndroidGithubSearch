@@ -7,11 +7,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GithubService {
+    companion object {
+        const val SEARCH_PER_PAGE = 20
+    }
+
     @GET("/search/repositories")
     suspend fun searchRepositories(
         @Query("q") query: String,
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int = 20,
+        @Query("per_page") perPage: Int = SEARCH_PER_PAGE,
         @Query("sort") sort: String = "stars"
     ): GithubSearchResponse
 
