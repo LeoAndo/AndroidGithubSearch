@@ -2,6 +2,7 @@ package com.leoleo.androidgithubsearch.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,7 +24,7 @@ fun ErrorFullScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxSize()
     ) {
-        Text(text = message)
+        Text(text = message, color = MaterialTheme.colorScheme.error)
         Spacer(modifier = Modifier.height(24.dp))
         Button(onClick = onReload) {
             Text(text = stringResource(R.string.reload))
