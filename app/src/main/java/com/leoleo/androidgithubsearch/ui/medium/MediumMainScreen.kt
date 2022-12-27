@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.testTag
 import com.leoleo.androidgithubsearch.ui.preview.PreviewTabletDevice
 
 @Composable
@@ -26,7 +27,8 @@ fun MediumMainScreen() {
     MediumMainScreenStateless(
         modifier = Modifier
             .fillMaxSize()
-            .padding(12.dp),
+            .padding(12.dp)
+            .testTag(stringResource(id = R.string.test_tag_medium_main_screen)),
         selectedItem = selectedItem,
         onClickNavigationRailItem = { item ->
             selectedItem = item
@@ -52,7 +54,8 @@ private fun MediumMainScreenStateless(
                         icon = { Icon(item.icon, contentDescription = item.label) },
                         label = { Text(item.label) },
                         selected = selectedItem == item,
-                        onClick = { onClickNavigationRailItem(item) }
+                        onClick = { onClickNavigationRailItem(item) },
+                        modifier = Modifier.testTag(item.label)
                     )
                 }
             }

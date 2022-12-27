@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
@@ -31,6 +32,7 @@ fun ExpandedMainScreen() {
     val modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)
+        .testTag(stringResource(id = R.string.test_tag_expanded_main_screen))
     ExpandedMainScreenStateless(
         modifier = modifier,
         drawerState = drawerState,

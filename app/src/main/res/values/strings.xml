@@ -19,5 +19,9 @@
     <string name="my_twitter_url">https://twitter.com/Leo99490411Leo</string>
     <string name="my_instagram_url">https://www.instagram.com/leo.ando100/</string>
     <string name="my_github_url">https://github.com/LeoAndo</string>
+    <string name="test_tag_compact_main_screen">test_tag_compact_main_screen</string>
+    <string name="test_tag_medium_main_screen">test_tag_compact_medium_screen</string>
+    <string name="test_tag_expanded_main_screen">test_tag_expanded_main_screen</string>
+    <string name="test_tag_search_screen">test_tag_search_screen</string>
 
 </resources>
