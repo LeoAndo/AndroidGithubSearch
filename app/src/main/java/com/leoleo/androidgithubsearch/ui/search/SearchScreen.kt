@@ -12,6 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,7 +44,7 @@ fun SearchScreen(
     var isSearched by rememberSaveable { mutableStateOf(false) } // TODO: このフラグ消したい.
     val githubRepositories = viewModel.githubRepositories.collectAsLazyPagingItems()
     SearchScreenStateless(
-        modifier = modifier,
+        modifier = modifier.testTag(stringResource(id = R.string.test_tag_search_screen)),
         githubRepositories = githubRepositories,
         loadState = githubRepositories.loadState,
         isSearched = isSearched,
@@ -84,7 +85,7 @@ private fun SearchScreenStateless(
                 onSearch()
             }),
             onValueChange = { onValueChange(it) },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.size(20.dp))
         Log.d("SearchScreen", "loadState: $loadState")
