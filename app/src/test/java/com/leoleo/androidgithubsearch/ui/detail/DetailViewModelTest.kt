@@ -2,15 +2,14 @@ package com.leoleo.androidgithubsearch.ui.detail
 
 import com.leoleo.androidgithubsearch.MainDispatcherRule
 import com.leoleo.androidgithubsearch.data.ErrorResult
-import com.leoleo.androidgithubsearch.data.SafeResult
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
