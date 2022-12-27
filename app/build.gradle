@@ -34,17 +34,6 @@ android {
         buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
     }
 
-    // Tests can be Robolectric or instrumented tests
-    sourceSets {
-        String sharedTestDir = 'src/sharedTest/java'
-        test {
-            java.srcDir sharedTestDir
-        }
-        androidTest {
-            java.srcDir sharedTestDir
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
