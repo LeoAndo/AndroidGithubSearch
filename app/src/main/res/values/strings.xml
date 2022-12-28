@@ -23,5 +23,7 @@
     <string name="test_tag_medium_main_screen">test_tag_compact_medium_screen</string>
     <string name="test_tag_expanded_main_screen">test_tag_expanded_main_screen</string>
     <string name="test_tag_search_screen">test_tag_search_screen</string>
+    <string name="forbidden_error_message">API rate limit exceeded. Please try again later.</string>
+    <string name="network_error_message">Please check the network status.</string>
 
 </resources>

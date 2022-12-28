@@ -44,26 +44,24 @@ private fun DetailScreenStateless(
         UiState.Loading -> LoadingFullScreen()
         is UiState.Error -> {
             val throwable = uiState.throwable
-            val message =
-                throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
-            if (throwable is ErrorResult) {
+            val message = if (throwable is ErrorResult) {
                 when (throwable) {
-                    is ErrorResult.NotFoundError -> {
-                        ErrorFullScreen(message = message, onReload = { onReload() })
-                        AppAlertDialog(
-                            titleText = message,
-                            messageText = stringResource(id = R.string.page_not_found_message),
-                            confirmText = stringResource(id = android.R.string.ok),
-                        )
-                    }
-                    is ErrorResult.BadRequestError, is ErrorResult.NetworkError, is ErrorResult.UnAuthorizedError,
-                    is ErrorResult.UnexpectedError -> {
-                        ErrorFullScreen(message = message, onReload = { onReload() })
+                    is ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ErrorResult.NotFoundError -> stringResource(id = R.string.page_not_found_message)
+                    is ErrorResult.BadRequestError, is ErrorResult.UnexpectedError,
+                    is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError -> {
+                        throwable.message ?: stringResource(id = R.string.default_error_message)
                     }
                 }
             } else {
-                ErrorFullScreen(message = message, onReload = { onReload() })
+                throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
             }
+            ErrorFullScreen(message = message, onReload = onReload)
+            AppAlertDialog(
+                titleText = stringResource(id = R.string.app_name),
+                messageText = message,
+                confirmText = stringResource(id = android.R.string.ok),
+            )
         }
         is UiState.Data -> {
             Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(20.dp)) {
