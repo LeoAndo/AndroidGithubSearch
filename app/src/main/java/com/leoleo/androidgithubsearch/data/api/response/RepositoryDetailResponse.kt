@@ -146,7 +146,7 @@ fun RepositoryDetailResponse.toModel(): RepositoryDetail {
         stargazersCount = this.stargazers_count.toString(),
         forksCount = this.forks_count.toString(),
         openIssuesCount = this.open_issues_count.toString(),
-        subscribersCount = this.subscribers_count.toString(),
+        watchersCount = this.watchers_count.toString(),
         language = this.language,
     )
 }

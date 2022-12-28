@@ -11,7 +11,7 @@
     <string name="stargazers_count">%s Star</string>
     <string name="forks_count">%s Fork</string>
     <string name="open_issues_count">%s Issue</string>
-    <string name="subscribers_count">%s Watcher</string>
+    <string name="watchers_count">%s Watcher</string>
     <string name="language">language: %s</string>
     <string name="medium_screen_message">This is Home Screen.</string>
     <string name="medium_screen_message2">If you want to use the search function of the github repository, tap the Search icon.</string>

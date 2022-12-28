@@ -36,7 +36,7 @@ class DetailViewModelTest {
         stargazersCount = "147731",
         forksCount = "24075",
         openIssuesCount = "11390",
-        subscribersCount = "3561",
+        watchersCount = "3561",
         language = "Dart",
     )
 
