@@ -154,6 +154,7 @@ private fun LazyListScope.errorContent(
                 is ErrorResult.UnexpectedError -> {
                     throwable.message ?: stringResource(id = R.string.default_error_message)
                 }
+                is ErrorResult.ForbiddenError -> stringResource(id = R.string.forbidden_error_message)
             }
         } else {
             throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)

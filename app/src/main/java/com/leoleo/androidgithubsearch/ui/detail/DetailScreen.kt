@@ -56,6 +56,11 @@ private fun DetailScreenStateless(
                             confirmText = stringResource(id = android.R.string.ok),
                         )
                     }
+                    is ErrorResult.ForbiddenError -> {
+                        ErrorFullScreen(
+                            message = stringResource(id = R.string.forbidden_error_message),
+                            onReload = { onReload() })
+                    }
                     is ErrorResult.BadRequestError, is ErrorResult.NetworkError, is ErrorResult.UnAuthorizedError,
                     is ErrorResult.UnexpectedError -> {
                         ErrorFullScreen(message = message, onReload = { onReload() })
