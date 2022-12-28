@@ -11,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
 fun ErrorFullScreen(
@@ -35,7 +34,7 @@ fun ErrorFullScreen(
 @PreviewDevices
 @Composable
 private fun Prev_ErrorFullScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         ErrorFullScreen(
             message = "Could not load.",
             onReload = {},

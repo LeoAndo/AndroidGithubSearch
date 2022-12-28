@@ -11,14 +11,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.ui.components.AppAlertDialog
-import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
-import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.data.ErrorResult
-import com.leoleo.androidgithubsearch.ui.components.NetworkImage
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
+import com.leoleo.androidgithubsearch.ui.components.*
 
 @Composable
 fun DetailScreen(
@@ -119,7 +115,7 @@ private fun Prev_DetailScreen() {
         watchersCount = "3561",
         language = "Dart",
     )
-    AndroidGithubSearchTheme {
+    AppSurface {
         DetailScreenStateless(
             uiState = UiState.Data(data),
             modifier = Modifier

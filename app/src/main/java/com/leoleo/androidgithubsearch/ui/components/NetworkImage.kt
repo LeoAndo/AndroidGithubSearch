@@ -1,8 +1,12 @@
 package com.leoleo.androidgithubsearch.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -12,8 +16,7 @@ import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import coil.transform.Transformation
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
+import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -40,27 +43,42 @@ fun NetworkImage(
     )
 }
 
-@PreviewDevices
+@PreviewPhoneDevice
 @Composable
 fun Prev_NetworkImage_Default() {
-    AndroidGithubSearchTheme {
-        NetworkImage(
-            imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
-            contentDescription = "flutter owner icon",
-            modifier = Modifier.size(60.dp),
-        )
+    AppSurface {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            NetworkImage(
+                imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
+                contentDescription = "flutter owner icon",
+                modifier = Modifier.size(60.dp),
+            )
+        }
     }
 }
 
-@PreviewDevices
+@PreviewPhoneDevice
 @Composable
 fun Prev_NetworkImage_CircleCrop() {
-    AndroidGithubSearchTheme {
-        NetworkImage(
-            imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
-            contentDescription = "flutter owner icon",
-            modifier = Modifier.size(60.dp),
-            transformations = listOf(CircleCropTransformation())
-        )
+    AppSurface {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            NetworkImage(
+                imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
+                contentDescription = "flutter owner icon",
+                modifier = Modifier
+                    .size(60.dp),
+                transformations = listOf(CircleCropTransformation())
+            )
+        }
     }
 }

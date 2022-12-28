@@ -15,8 +15,8 @@ import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.MyNavHost
 import com.leoleo.androidgithubsearch.ui.Page
 import com.leoleo.androidgithubsearch.ui.TopDestinations
+import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewFoldableDevice
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 import com.leoleo.androidgithubsearch.ui.user.UserScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -148,7 +148,7 @@ private fun HomeScreen(
 @PreviewFoldableDevice
 @Composable
 private fun Prev_Open_Home_ExpandedMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         ExpandedMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -166,7 +166,7 @@ private fun Prev_Open_Home_ExpandedMainScreen() {
 @PreviewFoldableDevice
 @Composable
 private fun Prev_Open_Search_ExpandedMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         ExpandedMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -184,7 +184,7 @@ private fun Prev_Open_Search_ExpandedMainScreen() {
 @PreviewFoldableDevice
 @Composable
 private fun Prev_Open_User_ExpandedMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         ExpandedMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -202,7 +202,7 @@ private fun Prev_Open_User_ExpandedMainScreen() {
 @PreviewFoldableDevice
 @Composable
 private fun Prev_Close_User_ExpandedMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         ExpandedMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()

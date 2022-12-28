@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 import com.leoleo.androidgithubsearch.ui.MyNavHost
 import com.leoleo.androidgithubsearch.ui.Page
 import com.leoleo.androidgithubsearch.ui.TopDestinations
@@ -18,6 +17,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.testTag
+import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewTabletDevice
 
 @Composable
@@ -94,7 +94,7 @@ private fun HomeScreen(modifier: Modifier) {
 @PreviewTabletDevice
 @Composable
 private fun Prev_Home_MediumMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         MediumMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -108,7 +108,7 @@ private fun Prev_Home_MediumMainScreen() {
 @PreviewTabletDevice
 @Composable
 private fun Prev_Search_MediumMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         MediumMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -122,7 +122,7 @@ private fun Prev_Search_MediumMainScreen() {
 @PreviewTabletDevice
 @Composable
 private fun Prev_User_MediumMainScreen() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         MediumMainScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
