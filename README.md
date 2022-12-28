@@ -20,13 +20,13 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 # 機能面:アピールポイント
 - Paging対応
 
-# capture (Resisable Emulator API 33): 正常系
+# capture (Resizable Emulator API 33): 正常系
 
 | Compact | Medium | Expanded |
 |:---|:---:| :---:|
 |<img src="https://user-images.githubusercontent.com/16476224/209779668-36390bc8-6d24-495d-9401-2bc9c0ac1b27.gif" height=891 width=411 /> | <img src="https://user-images.githubusercontent.com/16476224/209779932-81a8319c-ae17-479b-953e-5845451e857e.gif" height=841 width=673 /> | <img src="https://user-images.githubusercontent.com/16476224/209780283-64a005d9-b2d9-464a-8517-9b6858a74f45.gif" height=800 width=1280 /> |
 
-# capture (Resisable Emulator API 33): 異常系 (機内モードON)
+# capture (Resizable Emulator API 33): 異常系 (機内モードON)
 
 | 通信エラー | 復帰 |
 |:---| :---:|
