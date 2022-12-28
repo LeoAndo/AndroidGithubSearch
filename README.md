@@ -36,6 +36,6 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 
 # capture (Resizable Emulator API 33): ダークテーマ
 
-| Compact | Medium | Expanded |
-|:---|:---:| :---:|
-|<img src="https://user-images.githubusercontent.com/16476224/209815267-7ba8ee81-4430-4d82-a5a9-3500e1473462.png" height=891 width=411/> | <img src="https://user-images.githubusercontent.com/16476224/209815286-af9d29e5-34aa-4de9-b868-9e5ac2b4cd0f.png" height=841 width=673 /> | <img src="https://user-images.githubusercontent.com/16476224/209815334-de24bfb9-e2f8-4821-83f0-8876ef39db00.png" height=800 width=1280 /> |
+<img src="https://user-images.githubusercontent.com/16476224/209815267-7ba8ee81-4430-4d82-a5a9-3500e1473462.png" height=891 width=411/>
+<img src="https://user-images.githubusercontent.com/16476224/209815286-af9d29e5-34aa-4de9-b868-9e5ac2b4cd0f.png" height=841 width=673 />
+<img src="https://user-images.githubusercontent.com/16476224/209815334-de24bfb9-e2f8-4821-83f0-8876ef39db00.png" height=800 width=1280 />
