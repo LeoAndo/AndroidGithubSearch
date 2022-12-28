@@ -97,8 +97,8 @@ private fun DetailScreenStateless(
                 )
                 Text(
                     text = stringResource(
-                        id = R.string.subscribers_count,
-                        data.subscribersCount
+                        id = R.string.watchers_count,
+                        data.watchersCount
                     )
                 )
                 data.language?.let { Text(text = stringResource(id = R.string.language, it)) }
@@ -116,7 +116,7 @@ private fun Prev_DetailScreen() {
         stargazersCount = "147731",
         forksCount = "24075",
         openIssuesCount = "11390",
-        subscribersCount = "3561",
+        watchersCount = "3561",
         language = "Dart",
     )
     AndroidGithubSearchTheme {

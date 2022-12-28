@@ -6,6 +6,6 @@ data class RepositoryDetail(
     val stargazersCount: String,
     val forksCount: String,
     val openIssuesCount: String,
-    val subscribersCount: String,
+    val watchersCount: String,
     val language: String?,
 )
