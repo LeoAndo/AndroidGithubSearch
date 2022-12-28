@@ -31,8 +31,7 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 
 | 通信エラー | 復帰 |
 |:---| :---:|
-|<img src="https://user-images.githubusercontent.com/16476224/209780622-e42e338f-d18d-467e-aba0-9aa70af65d65.png" height=891 width=411 /> | <img src="https://user-images.githubusercontent.com/16476224/209780951-e9655d68-1f2f-4b2a-974c-853f94047737.gif" height=891 width=411 /> |
-
+|<img src="https://user-images.githubusercontent.com/16476224/209837018-6db80528-412b-484a-9b63-8f6817a56a2b.gif" height=891 width=411 /> | <img src="https://user-images.githubusercontent.com/16476224/209837032-1ecc630c-3735-472b-9af7-ffd15690c38f.gif" height=891 width=411 /> |
 
 # capture (Resizable Emulator API 33): ダークテーマ
 
