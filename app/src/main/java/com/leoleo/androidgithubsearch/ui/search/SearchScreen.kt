@@ -150,11 +150,11 @@ private fun LazyListScope.errorContent(
         val message = if (throwable is ErrorResult) {
             when (throwable) {
                 is ErrorResult.UnAuthorizedError -> stringResource(id = R.string.unauthorized_message)
-                is ErrorResult.BadRequestError, is ErrorResult.NetworkError, is ErrorResult.NotFoundError,
-                is ErrorResult.UnexpectedError -> {
+                is ErrorResult.ForbiddenError -> stringResource(id = R.string.forbidden_error_message)
+                is ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                is ErrorResult.BadRequestError, is ErrorResult.NotFoundError, is ErrorResult.UnexpectedError -> {
                     throwable.message ?: stringResource(id = R.string.default_error_message)
                 }
-                is ErrorResult.ForbiddenError -> stringResource(id = R.string.forbidden_error_message)
             }
         } else {
             throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
