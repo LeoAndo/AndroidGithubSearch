@@ -16,6 +16,7 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 - Material3 Themeの適用
 - Jetpack Compose対応
 - Responsive UI対応
+- Dark Theme対応
 
 # 機能面:アピールポイント
 - Paging対応
@@ -31,3 +32,10 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 | 通信エラー | 復帰 |
 |:---| :---:|
 |<img src="https://user-images.githubusercontent.com/16476224/209780622-e42e338f-d18d-467e-aba0-9aa70af65d65.png" height=891 width=411 /> | <img src="https://user-images.githubusercontent.com/16476224/209780951-e9655d68-1f2f-4b2a-974c-853f94047737.gif" height=891 width=411 /> |
+
+
+# capture (Resizable Emulator API 33): ダークテーマ
+
+| Compact | Medium | Expanded |
+|:---|:---:| :---:|
+|<img src="https://user-images.githubusercontent.com/16476224/209815267-7ba8ee81-4430-4d82-a5a9-3500e1473462.png" height=891 width=411/> | <img src="https://user-images.githubusercontent.com/16476224/209815286-af9d29e5-34aa-4de9-b868-9e5ac2b4cd0f.png" height=841 width=673 /> | <img src="https://user-images.githubusercontent.com/16476224/209815334-de24bfb9-e2f8-4821-83f0-8876ef39db00.png" height=800 width=1280 /> |
