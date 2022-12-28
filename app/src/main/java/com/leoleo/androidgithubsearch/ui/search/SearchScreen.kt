@@ -28,10 +28,10 @@ import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.data.ErrorResult
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
 import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -182,12 +182,12 @@ private fun Prev_Initial_SearchScreen() {
         ),
         mediator = null
     )
-    AndroidGithubSearchTheme {
+    AppSurface {
         SearchScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(12.dp),
-            query = "android-compose",
+            query = "",
             onValueChange = {},
             onSearch = {},
             onClickCardItem = { _, _ -> },
@@ -218,7 +218,7 @@ private fun Prev_Loading_SearchScreen() {
         ),
         mediator = null
     )
-    AndroidGithubSearchTheme {
+    AppSurface {
         SearchScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -253,7 +253,7 @@ private fun Prev_Success_Item_Empty_SearchScreen() {
         ),
         mediator = null
     )
-    AndroidGithubSearchTheme {
+    AppSurface {
         SearchScreenStateless(
             modifier = Modifier
                 .fillMaxSize()
@@ -291,7 +291,7 @@ private fun Prev_Error_SearchScreen() {
         ),
         mediator = null
     )
-    AndroidGithubSearchTheme {
+    AppSurface {
         SearchScreenStateless(
             modifier = Modifier
                 .fillMaxSize()

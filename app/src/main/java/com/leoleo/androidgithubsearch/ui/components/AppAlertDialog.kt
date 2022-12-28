@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
-import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
 fun AppAlertDialog(
@@ -93,7 +92,7 @@ fun AppAlertDialogStateless(
 @PreviewDevices
 @Composable
 fun AppAlertDialog_Preview_Show() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         AppAlertDialogStateless(
             openDialog = true,
             titleText = "Dialog Title",
@@ -110,7 +109,7 @@ fun AppAlertDialog_Preview_Show() {
 @PreviewPhoneDevice
 @Composable
 fun AppAlertDialog_Preview_Hide() {
-    AndroidGithubSearchTheme {
+    AppSurface {
         AppAlertDialogStateless(
             openDialog = false,
             titleText = "Dialog Title",
