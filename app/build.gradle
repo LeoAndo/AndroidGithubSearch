@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlinx-serialization'
 }
 
 def localProperties = new Properties()
@@ -88,6 +89,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.9.3"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    // Network
+    def ktor_version = '2.2.1'
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
 
     // DI
     implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
@@ -108,4 +113,7 @@ dependencies {
 
     // responsive UI for larger screens
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
+
+    // json
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
 }
