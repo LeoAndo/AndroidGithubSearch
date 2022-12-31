@@ -59,12 +59,7 @@ private fun ExpandedMainScreenStateless(
         }
     }
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing),
-        color = MaterialTheme.colorScheme.background
-    ) {
+    AppSurface {
         DismissibleNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {

@@ -11,11 +11,12 @@ import com.leoleo.androidgithubsearch.ui.theme.AndroidGithubSearchTheme
 
 @Composable
 fun AppSurface(
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     AndroidGithubSearchTheme {
         Surface(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .windowInsetsPadding(WindowInsets.safeDrawing),
             color = MaterialTheme.colorScheme.background,
