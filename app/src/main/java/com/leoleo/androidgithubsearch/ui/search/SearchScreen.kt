@@ -147,13 +147,14 @@ private fun LazyListScope.errorContent(
     onReload: () -> Unit,
 ) {
     item {
+        val defaultErrorMessage = throwable.localizedMessage
+            ?: stringResource(id = R.string.default_error_message)
         val message = if (throwable is ErrorResult) {
             when (throwable) {
-                is ErrorResult.UnAuthorizedError -> stringResource(id = R.string.unauthorized_message)
-                is ErrorResult.ForbiddenError -> stringResource(id = R.string.forbidden_error_message)
-                is ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                is ErrorResult.BadRequestError, is ErrorResult.NotFoundError, is ErrorResult.UnexpectedError -> {
-                    throwable.message ?: stringResource(id = R.string.default_error_message)
+                ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                is ErrorResult.NotFoundError, is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError,
+                is ErrorResult.UnprocessableEntity, is ErrorResult.UnexpectedError -> {
+                    defaultErrorMessage
                 }
             }
         } else {
@@ -277,7 +278,7 @@ private fun Prev_Error_SearchScreen() {
         flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Air Plane Mode: Onの時のState
     val refreshState = LoadState.Error(
-        error = ErrorResult.NetworkError(message = "Unable to resolve host \"api.github.com\": No address associated with hostname")
+        error = ErrorResult.NetworkError
     ) // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
     val appendState = LoadState.NotLoading(endOfPaginationReached = false)

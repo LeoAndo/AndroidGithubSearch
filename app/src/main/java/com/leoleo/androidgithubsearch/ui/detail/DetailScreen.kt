@@ -44,17 +44,18 @@ private fun DetailScreenStateless(
         UiState.Loading -> LoadingFullScreen()
         is UiState.Error -> {
             val throwable = uiState.throwable
+            val defaultErrorMessage = throwable.localizedMessage
+                ?: stringResource(id = R.string.default_error_message)
             val message = if (throwable is ErrorResult) {
                 when (throwable) {
-                    is ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is ErrorResult.NotFoundError -> stringResource(id = R.string.page_not_found_message)
-                    is ErrorResult.BadRequestError, is ErrorResult.UnexpectedError,
-                    is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError -> {
-                        throwable.message ?: stringResource(id = R.string.default_error_message)
+                    ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ErrorResult.NotFoundError, is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError,
+                    is ErrorResult.UnprocessableEntity, is ErrorResult.UnexpectedError -> {
+                        defaultErrorMessage
                     }
                 }
             } else {
-                throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
+                defaultErrorMessage
             }
             ErrorFullScreen(message = message, onReload = onReload)
             AppAlertDialog(

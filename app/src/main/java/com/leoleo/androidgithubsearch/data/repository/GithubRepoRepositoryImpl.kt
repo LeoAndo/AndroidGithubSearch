@@ -5,7 +5,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.leoleo.androidgithubsearch.data.api.GithubService
 import com.leoleo.androidgithubsearch.data.api.GithubService.Companion.SEARCH_PER_PAGE
-import com.leoleo.androidgithubsearch.data.api.response.toModel
 import com.leoleo.androidgithubsearch.data.dataOrThrow
 import com.leoleo.androidgithubsearch.data.paging.GithubRepoPagingSource
 import com.leoleo.androidgithubsearch.di.IoDispatcher
@@ -25,7 +24,7 @@ class GithubRepoRepositoryImpl @Inject constructor(
         ownerName: String,
         repositoryName: String
     ): RepositoryDetail =
-        dataOrThrow(dispatcher) { api.fetchRepositoryDetail(ownerName, repositoryName).toModel() }
+        dataOrThrow(dispatcher) { api.fetchRepositoryDetail(ownerName, repositoryName) }
 
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
         return Pager(
