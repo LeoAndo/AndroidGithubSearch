@@ -3,7 +3,7 @@
 Native Androidで作るGithubリポジトリ検索アプリになります。<br>
 
 # アーキテクチャ
-[Wiki](https://github.com/LeoAndo/AndroidGithubSearch/wiki/%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)にまとめています
+[Wiki](https://github.com/LeoAndo/AndroidGithubSearch/wiki/architecture)にまとめています
 
 # 開発環境
 - IDE: Android Studio Dolphin 2021.3.1 Patch 1
