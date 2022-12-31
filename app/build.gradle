@@ -77,7 +77,6 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
     // Network
     def ktor_version = '2.2.1'
