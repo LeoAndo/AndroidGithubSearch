@@ -10,7 +10,7 @@
     public static int w(...);
     public static int e(...);
 }
--keep class jp.co.yumemi.android.codecheck.R$* { *; }
+-keep class com.leoleo.androidgithubsearch.R$* { *; }
 # Logを削除する - END
 
 # Parcelable - START
