@@ -13,7 +13,7 @@ import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.data.ErrorResult
+import com.leoleo.androidgithubsearch.data.api.ApiErrorResult
 import com.leoleo.androidgithubsearch.ui.components.*
 
 @Composable
@@ -46,11 +46,11 @@ private fun DetailScreenStateless(
             val throwable = uiState.throwable
             val defaultErrorMessage = throwable.localizedMessage
                 ?: stringResource(id = R.string.default_error_message)
-            val message = if (throwable is ErrorResult) {
+            val message = if (throwable is ApiErrorResult) {
                 when (throwable) {
-                    ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is ErrorResult.NotFoundError, is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError,
-                    is ErrorResult.UnprocessableEntity, is ErrorResult.UnexpectedError -> {
+                    ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
+                    is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
                         defaultErrorMessage
                     }
                 }

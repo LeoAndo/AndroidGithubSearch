@@ -26,7 +26,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.data.ErrorResult
+import com.leoleo.androidgithubsearch.data.api.ApiErrorResult
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
@@ -149,11 +149,11 @@ private fun LazyListScope.errorContent(
     item {
         val defaultErrorMessage = throwable.localizedMessage
             ?: stringResource(id = R.string.default_error_message)
-        val message = if (throwable is ErrorResult) {
+        val message = if (throwable is ApiErrorResult) {
             when (throwable) {
-                ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                is ErrorResult.NotFoundError, is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError,
-                is ErrorResult.UnprocessableEntity, is ErrorResult.UnexpectedError -> {
+                ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
+                is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
                     defaultErrorMessage
                 }
             }
@@ -278,7 +278,7 @@ private fun Prev_Error_SearchScreen() {
         flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Air Plane Mode: Onの時のState
     val refreshState = LoadState.Error(
-        error = ErrorResult.NetworkError
+        error = ApiErrorResult.NetworkError
     ) // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
     val appendState = LoadState.NotLoading(endOfPaginationReached = false)
