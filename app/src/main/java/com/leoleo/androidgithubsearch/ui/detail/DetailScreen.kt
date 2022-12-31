@@ -13,7 +13,7 @@ import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.data.ErrorResult
+import com.leoleo.androidgithubsearch.data.api.ApiErrorResult
 import com.leoleo.androidgithubsearch.ui.components.*
 
 @Composable
@@ -44,17 +44,18 @@ private fun DetailScreenStateless(
         UiState.Loading -> LoadingFullScreen()
         is UiState.Error -> {
             val throwable = uiState.throwable
-            val message = if (throwable is ErrorResult) {
+            val defaultErrorMessage = throwable.localizedMessage
+                ?: stringResource(id = R.string.default_error_message)
+            val message = if (throwable is ApiErrorResult) {
                 when (throwable) {
-                    is ErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is ErrorResult.NotFoundError -> stringResource(id = R.string.page_not_found_message)
-                    is ErrorResult.BadRequestError, is ErrorResult.UnexpectedError,
-                    is ErrorResult.ForbiddenError, is ErrorResult.UnAuthorizedError -> {
-                        throwable.message ?: stringResource(id = R.string.default_error_message)
+                    ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
+                    is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
+                        defaultErrorMessage
                     }
                 }
             } else {
-                throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
+                defaultErrorMessage
             }
             ErrorFullScreen(message = message, onReload = onReload)
             AppAlertDialog(

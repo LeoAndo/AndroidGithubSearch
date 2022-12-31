@@ -1,8 +1,8 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.squareup.moshi.Json
 
+@kotlinx.serialization.Serializable
 data class RepositoryDetailResponse(
     val allow_forking: Boolean,
     val archive_url: String,
@@ -63,7 +63,7 @@ data class RepositoryDetailResponse(
     val open_issues_count: Int,
     val organization: Organization?,
     val owner: Owner,
-    @Json(name = "private") val isPrivate: Boolean,
+    val private: Boolean,
     val pulls_url: String,
     val pushed_at: String,
     val releases_url: String,
@@ -88,6 +88,7 @@ data class RepositoryDetailResponse(
     val watchers_count: Int,
     val web_commit_signoff_required: Boolean
 ) {
+    @kotlinx.serialization.Serializable
     data class License(
         val key: String,
         val name: String,
@@ -96,6 +97,7 @@ data class RepositoryDetailResponse(
         val url: String?
     )
 
+    @kotlinx.serialization.Serializable
     data class Organization(
         val avatar_url: String,
         val events_url: String,
@@ -117,6 +119,7 @@ data class RepositoryDetailResponse(
         val url: String
     )
 
+    @kotlinx.serialization.Serializable
     data class Owner(
         val avatar_url: String,
         val events_url: String,

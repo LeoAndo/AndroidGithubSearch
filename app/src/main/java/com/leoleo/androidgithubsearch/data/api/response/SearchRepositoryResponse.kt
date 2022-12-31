@@ -1,13 +1,14 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
-import com.squareup.moshi.Json
 
-data class GithubSearchResponse(
+@kotlinx.serialization.Serializable
+data class SearchRepositoryResponse(
     val incomplete_results: Boolean,
     val items: List<Item>,
     val total_count: Int
 ) {
+    @kotlinx.serialization.Serializable
     data class Item(
         val allow_forking: Boolean,
         val archive_url: String,
@@ -66,7 +67,7 @@ data class GithubSearchResponse(
         val open_issues: Int,
         val open_issues_count: Int,
         val owner: Owner,
-        @Json(name = "private") val isPrivate: Boolean,
+        val private: Boolean,
         val pulls_url: String,
         val pushed_at: String,
         val releases_url: String,
@@ -90,6 +91,7 @@ data class GithubSearchResponse(
         val watchers_count: Int,
         val web_commit_signoff_required: Boolean
     ) {
+        @kotlinx.serialization.Serializable
         data class License(
             val key: String,
             val name: String,
@@ -98,6 +100,7 @@ data class GithubSearchResponse(
             val url: String?
         )
 
+        @kotlinx.serialization.Serializable
         data class Owner(
             val avatar_url: String,
             val events_url: String,
@@ -121,7 +124,7 @@ data class GithubSearchResponse(
     }
 }
 
-fun GithubSearchResponse.toModel(): List<RepositorySummary> {
+fun SearchRepositoryResponse.toModel(): List<RepositorySummary> {
     return this.items.map {
         RepositorySummary(
             id = it.id,

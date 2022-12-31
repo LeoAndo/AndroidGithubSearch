@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlinx-serialization'
 }
 
 def localProperties = new Properties()
@@ -41,11 +42,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
     buildFeatures {
         compose true
@@ -75,19 +76,11 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
     // Network
-    def retrofit_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    def okhttp_version = "5.0.0-alpha.10"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-    def moshi_version = "1.12.0"
-    implementation "com.squareup.moshi:moshi:$moshi_version"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.9.3"
-    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    def ktor_version = '2.2.1'
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
 
     // DI
     implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
@@ -108,4 +101,7 @@ dependencies {
 
     // responsive UI for larger screens
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
+
+    // json
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
 }
