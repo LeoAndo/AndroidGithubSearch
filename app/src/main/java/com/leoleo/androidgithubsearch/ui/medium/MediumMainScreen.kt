@@ -41,12 +41,7 @@ private fun MediumMainScreenStateless(
     selectedItem: Page,
     onClickNavigationRailItem: (Page) -> Unit,
 ) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing),
-        color = MaterialTheme.colorScheme.background
-    ) {
+    AppSurface {
         Row {
             NavigationRail {
                 Page.values().forEachIndexed { _, item ->
