@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.data
+package com.leoleo.androidgithubsearch.data.api
 
 import com.leoleo.androidgithubsearch.data.api.response.GithubErrorResponse
 import io.ktor.client.call.*
