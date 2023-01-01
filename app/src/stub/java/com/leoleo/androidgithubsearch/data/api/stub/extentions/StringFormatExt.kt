@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.test.extentions
+package com.leoleo.androidgithubsearch.data.api.stub.extentions
 
 import android.content.Context
 import kotlinx.serialization.StringFormat
