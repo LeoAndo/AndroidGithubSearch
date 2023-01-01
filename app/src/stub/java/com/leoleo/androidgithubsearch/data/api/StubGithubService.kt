@@ -11,8 +11,8 @@ import kotlinx.serialization.json.Json
 
 class StubGithubService constructor(
     private val context: Context,
+    private val format: Json
 ) : GithubService {
-    private val format = Json { ignoreUnknownKeys = true }
     override suspend fun searchRepositories(
         query: String,
         page: Int,

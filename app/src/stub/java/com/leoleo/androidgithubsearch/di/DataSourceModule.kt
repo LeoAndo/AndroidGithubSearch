@@ -12,6 +12,7 @@ import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import kotlinx.serialization.json.Json
 
 import javax.inject.Singleton
 
@@ -20,6 +21,8 @@ import javax.inject.Singleton
 object DataSourceModule {
     @Singleton
     @Provides
-    fun provideGithubService(@ApplicationContext context: Context): GithubService =
-        StubGithubService(context)
+    fun provideGithubService(@ApplicationContext context: Context, format: Json): GithubService {
+        return StubGithubService(context, format)
+    }
+
 }
