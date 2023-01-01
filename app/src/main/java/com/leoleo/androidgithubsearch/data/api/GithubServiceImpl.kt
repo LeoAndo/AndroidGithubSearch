@@ -17,10 +17,7 @@ import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class GithubServiceImpl : GithubService {
-    private val format by lazy {
-        Json { ignoreUnknownKeys = true }
-    }
+class GithubServiceImpl(private val format: Json) : GithubService {
     private val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             defaultRequest {
