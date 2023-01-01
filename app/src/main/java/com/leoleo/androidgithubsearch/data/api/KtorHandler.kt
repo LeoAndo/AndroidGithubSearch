@@ -11,11 +11,11 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.UnknownHostException
 
-object KtorUtil {
-    suspend fun <T> dataOrThrow(
-        dispatcher: CoroutineDispatcher,
-        apiCall: suspend () -> T
-    ): T {
+class KtorHandler(
+    private val dispatcher: CoroutineDispatcher,
+    private val format: Json,
+) {
+    suspend fun <T> dataOrThrow(apiCall: suspend () -> T): T {
         return withContext(dispatcher) {
             try {
                 apiCall.invoke()
@@ -28,7 +28,6 @@ object KtorUtil {
                     is RedirectResponseException -> throw e
                     is ClientRequestException -> { // ktor: 400番台のエラー
                         val errorResponse = e.response
-                        val format = Json { ignoreUnknownKeys = true }
                         val message =
                             format.decodeFromString<GithubErrorResponse>(errorResponse.body()).message
                         when (errorResponse.status) {

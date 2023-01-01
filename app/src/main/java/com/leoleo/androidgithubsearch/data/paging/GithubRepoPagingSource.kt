@@ -4,14 +4,13 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.leoleo.androidgithubsearch.data.api.GithubService
-import com.leoleo.androidgithubsearch.data.api.KtorUtil
+import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
-import kotlinx.coroutines.CoroutineDispatcher
 
 class GithubRepoPagingSource(
     private val query: String,
     private val api: GithubService,
-    private val dispatcher: CoroutineDispatcher,
+    private val ktorHandler: KtorHandler,
 ) : PagingSource<Int, RepositorySummary>() {
 
     override fun getRefreshKey(state: PagingState<Int, RepositorySummary>): Int? {
@@ -30,7 +29,7 @@ class GithubRepoPagingSource(
             val from = pageNumber * size
             val placeholdersEnabled = params.placeholdersEnabled
             val data =
-                KtorUtil.dataOrThrow(dispatcher) {
+                ktorHandler.dataOrThrow {
                     api.searchRepositories(query = query, page = pageNumber)
                 }
             // Since {INIT_PAGE_NO} is the lowest page number, return null to signify no more pages should
