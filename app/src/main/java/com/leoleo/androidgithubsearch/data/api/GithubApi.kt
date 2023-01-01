@@ -17,7 +17,7 @@ import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class GithubServiceImpl(private val format: Json) : GithubService {
+class GithubApi(private val format: Json) {
     private val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             defaultRequest {
@@ -41,25 +41,33 @@ class GithubServiceImpl(private val format: Json) : GithubService {
         }
     }
 
-    override suspend fun searchRepositories(
+    suspend fun searchRepositories(
         query: String,
         page: Int,
-        perPage: Int,
-        sort: String
+        perPage: Int = SEARCH_PER_PAGE,
+        sort: String = "stars"
     ): List<RepositorySummary> {
+        /*
+        サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
+        format.decodeFromStubData<SearchRepositoryResponse>(
+            context,
+            format,
+            "search_repositories_success.json"
+        ).toModel()
+         */
         val response: HttpResponse = httpClient.get {
             url { path("search", "repositories") }
             parameter("q", query)
             parameter("page", page)
             parameter("per_page", perPage)
-            parameter("sort", "stars")
+            parameter("sort", sort)
         }
         val data =
             format.decodeFromString<SearchRepositoryResponse>(response.body())
         return data.toModel()
     }
 
-    override suspend fun fetchRepositoryDetail(
+    suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String
     ): RepositoryDetail {
@@ -73,6 +81,7 @@ class GithubServiceImpl(private val format: Json) : GithubService {
     }
 
     companion object {
+        const val SEARCH_PER_PAGE = 20
         private const val TIMEOUT_MILLIS: Long = 30 * 1000
     }
 }
