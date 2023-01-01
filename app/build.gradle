@@ -31,8 +31,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        // 各productFlavorsで共通のTokenを利用する想定
         buildConfigField("String", "GITHUB_ACCESS_TOKEN", "\"" + localProperties['GITHUB_ACCESS_TOKEN'] + "\"")
-        buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
     }
 
     buildTypes {
@@ -58,6 +58,31 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+            applicationIdSuffix ".development"
+            versionNameSuffix "-development"
+        }
+        stub {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+            applicationIdSuffix ".stub"
+            versionNameSuffix "-stub"
+        }
+        staging {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+        }
+        production {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
         }
     }
 }
