@@ -1,6 +1,7 @@
 package com.leoleo.androidgithubsearch.di
 
 import com.leoleo.androidgithubsearch.data.api.GithubService
+import com.leoleo.androidgithubsearch.data.api.GithubServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +15,8 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object ApiModule {
+object DataSourceModule {
     @Singleton
     @Provides
-    fun provideGithubService(): GithubService = GithubService()
+    fun provideGithubService(): GithubService = GithubServiceImpl()
 }
