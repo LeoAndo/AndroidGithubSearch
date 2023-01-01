@@ -7,24 +7,22 @@ import com.leoleo.androidgithubsearch.data.api.GithubService
 import com.leoleo.androidgithubsearch.data.api.GithubService.Companion.SEARCH_PER_PAGE
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.data.paging.GithubRepoPagingSource
-import com.leoleo.androidgithubsearch.di.IoDispatcher
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GithubRepoRepositoryImpl @Inject constructor(
     private val api: GithubService,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    private val ktorHandler: KtorHandler,
 ) : GithubRepoRepository {
 
     override suspend fun getRepositoryDetail(
         ownerName: String,
         repositoryName: String
     ): RepositoryDetail =
-        KtorHandler.dataOrThrow(dispatcher) { api.fetchRepositoryDetail(ownerName, repositoryName) }
+        ktorHandler.dataOrThrow { api.fetchRepositoryDetail(ownerName, repositoryName) }
 
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
         return Pager(
@@ -33,7 +31,7 @@ class GithubRepoRepositoryImpl @Inject constructor(
                 initialLoadSize = SEARCH_PER_PAGE,
                 enablePlaceholders = true
             ),
-            pagingSourceFactory = { GithubRepoPagingSource(query, api, dispatcher) },
+            pagingSourceFactory = { GithubRepoPagingSource(query, api, ktorHandler) },
         ).flow
     }
 }
