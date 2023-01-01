@@ -11,7 +11,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.UnknownHostException
 
-object KtorUtil {
+object KtorHandler {
     suspend fun <T> dataOrThrow(
         dispatcher: CoroutineDispatcher,
         apiCall: suspend () -> T

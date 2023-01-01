@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.leoleo.androidgithubsearch.data.api.GithubService
 import com.leoleo.androidgithubsearch.data.api.GithubService.Companion.SEARCH_PER_PAGE
-import com.leoleo.androidgithubsearch.data.api.KtorUtil
+import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.data.paging.GithubRepoPagingSource
 import com.leoleo.androidgithubsearch.di.IoDispatcher
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
@@ -24,7 +24,7 @@ class GithubRepoRepositoryImpl @Inject constructor(
         ownerName: String,
         repositoryName: String
     ): RepositoryDetail =
-        KtorUtil.dataOrThrow(dispatcher) { api.fetchRepositoryDetail(ownerName, repositoryName) }
+        KtorHandler.dataOrThrow(dispatcher) { api.fetchRepositoryDetail(ownerName, repositoryName) }
 
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
         return Pager(
