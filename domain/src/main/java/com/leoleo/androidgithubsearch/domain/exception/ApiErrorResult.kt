@@ -1,6 +1,4 @@
-package com.leoleo.androidgithubsearch.data.api
-
-import java.lang.Exception
+package com.leoleo.androidgithubsearch.domain.exception
 
 sealed class ApiErrorResult : Exception() {
     data class UnAuthorizedError(override val message: String) : ApiErrorResult()

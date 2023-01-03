@@ -1,6 +1,7 @@
 package com.leoleo.androidgithubsearch.data.di
 
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
+import com.leoleo.androidgithubsearch.domain.di.IoDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

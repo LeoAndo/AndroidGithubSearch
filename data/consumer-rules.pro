@@ -1,17 +1,3 @@
-# retrace setting. -START
--keepattributes LineNumberTable,SourceFile
-# retrace setting. -END
-
-# Logを削除する - START
--assumenosideeffects class android.util.Log {
-    public static int v(...);
-    public static int d(...);
-    public static int i(...);
-    public static int w(...);
-    public static int e(...);
-}
-# Logを削除する - END
-
 # io.ktor -START
 # https://github.com/ktorio/ktor/issues/379#issuecomment-453728961
 -keep class io.ktor.** { *; }
@@ -21,11 +7,6 @@
 -dontwarn com.typesafe.**
 -dontwarn org.slf4j.**
 # io.ktor -END
-
-# dagger Hilt - START
-# https://github.com/google/dagger/issues/2291#issuecomment-764518175
--keepnames class dagger.**
-# dagger Hilt - END
 
 # kotlinx-serialization - START
 # https://github.com/Kotlin/kotlinx.serialization#android

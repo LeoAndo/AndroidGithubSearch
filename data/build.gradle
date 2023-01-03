@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
     // Network
     def ktor_version = '2.2.1'
     implementation "io.ktor:ktor-client-android:$ktor_version"

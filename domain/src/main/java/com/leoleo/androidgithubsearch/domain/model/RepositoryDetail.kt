@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.data.domain.model
+package com.leoleo.androidgithubsearch.domain.model
 
 data class RepositoryDetail(
     val name: String,

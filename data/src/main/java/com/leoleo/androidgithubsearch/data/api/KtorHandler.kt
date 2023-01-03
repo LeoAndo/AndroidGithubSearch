@@ -1,6 +1,7 @@
 package com.leoleo.androidgithubsearch.data.api
 
 import com.leoleo.androidgithubsearch.data.api.response.GithubErrorResponse
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
 import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
 import io.ktor.client.plugins.*

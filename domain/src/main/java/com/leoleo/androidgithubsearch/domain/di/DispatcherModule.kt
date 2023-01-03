@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.data.di
+package com.leoleo.androidgithubsearch.domain.di
 
 import dagger.Module
 import dagger.Provides

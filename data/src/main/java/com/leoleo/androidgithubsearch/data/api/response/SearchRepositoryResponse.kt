@@ -1,6 +1,6 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
-import com.leoleo.androidgithubsearch.data.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 
 @kotlinx.serialization.Serializable
 data class SearchRepositoryResponse(
@@ -124,9 +124,9 @@ data class SearchRepositoryResponse(
     }
 }
 
-fun SearchRepositoryResponse.toModel(): List<RepositorySummary> {
+fun SearchRepositoryResponse.toModel(): List<com.leoleo.androidgithubsearch.domain.model.RepositorySummary> {
     return this.items.map {
-        RepositorySummary(
+        com.leoleo.androidgithubsearch.domain.model.RepositorySummary(
             id = it.id,
             name = it.name,
             ownerName = it.owner.login,

@@ -1,6 +1,6 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
-import com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail
+import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 
 @kotlinx.serialization.Serializable
 data class RepositoryDetailResponse(
@@ -22,8 +22,8 @@ data class RepositoryDetailResponse(
     )
 }
 
-fun RepositoryDetailResponse.toModel(): RepositoryDetail {
-    return RepositoryDetail(
+fun RepositoryDetailResponse.toModel(): com.leoleo.androidgithubsearch.domain.model.RepositoryDetail {
+    return com.leoleo.androidgithubsearch.domain.model.RepositoryDetail(
         name = this.name,
         ownerAvatarUrl = this.owner.avatar_url,
         stargazersCount = this.stargazers_count.toString(),

@@ -2,7 +2,8 @@ package com.leoleo.androidgithubsearch.ui.detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -10,11 +11,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.transform.CircleCropTransformation
-import com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.data.api.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
 import com.leoleo.androidgithubsearch.ui.components.*
+import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 
 @Composable
 fun DetailScreen(
@@ -46,11 +46,11 @@ private fun DetailScreenStateless(
             val throwable = uiState.throwable
             val defaultErrorMessage = throwable.localizedMessage
                 ?: stringResource(id = R.string.default_error_message)
-            val message = if (throwable is com.leoleo.androidgithubsearch.data.api.ApiErrorResult) {
+            val message = if (throwable is ApiErrorResult) {
                 when (throwable) {
-                    com.leoleo.androidgithubsearch.data.api.ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is com.leoleo.androidgithubsearch.data.api.ApiErrorResult.NotFoundError, is com.leoleo.androidgithubsearch.data.api.ApiErrorResult.ForbiddenError, is com.leoleo.androidgithubsearch.data.api.ApiErrorResult.UnAuthorizedError,
-                    is com.leoleo.androidgithubsearch.data.api.ApiErrorResult.UnprocessableEntity, is com.leoleo.androidgithubsearch.data.api.ApiErrorResult.UnexpectedError -> {
+                    ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
+                    is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
                         defaultErrorMessage
                     }
                 }
@@ -105,7 +105,7 @@ private fun DetailScreenStateless(
 @PreviewDevices
 @Composable
 private fun Prev_DetailScreen() {
-    val data = com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail(
+    val data = com.leoleo.androidgithubsearch.domain.model.RepositoryDetail(
         name = "flutter",
         ownerAvatarUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
         stargazersCount = "147731",

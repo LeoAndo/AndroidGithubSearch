@@ -5,15 +5,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.leoleo.androidgithubsearch.data.api.GithubApi
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
-import com.leoleo.androidgithubsearch.data.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 
 class GithubRepoPagingSource(
     private val query: String,
     private val api: GithubApi,
     private val ktorHandler: KtorHandler,
-) : PagingSource<Int, RepositorySummary>() {
+) : PagingSource<Int, com.leoleo.androidgithubsearch.domain.model.RepositorySummary>() {
 
-    override fun getRefreshKey(state: PagingState<Int, RepositorySummary>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, com.leoleo.androidgithubsearch.domain.model.RepositorySummary>): Int? {
         val key = state.anchorPosition?.let {
             state.closestPageToPosition(it)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
@@ -22,7 +22,7 @@ class GithubRepoPagingSource(
         return key
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepositorySummary> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, com.leoleo.androidgithubsearch.domain.model.RepositorySummary> {
         return try {
             val pageNumber = params.key ?: INIT_PAGE_NO
             val size = params.loadSize

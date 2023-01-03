@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AndroidGithubSearch"
-include (':app',':data')
+include (':app',':data', ':domain')
