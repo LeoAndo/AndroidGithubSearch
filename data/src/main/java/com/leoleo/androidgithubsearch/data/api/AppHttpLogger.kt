@@ -1,7 +1,7 @@
 package com.leoleo.androidgithubsearch.data.api
 
 import android.util.Log
-import com.leoleo.androidgithubsearch.BuildConfig
+import com.leoleo.androidgithubsearch.data.BuildConfig
 import io.ktor.client.plugins.logging.*
 
 class AppHttpLogger : Logger {

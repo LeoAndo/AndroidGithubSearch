@@ -1,8 +1,8 @@
-package com.leoleo.androidgithubsearch.domain.repository
+package com.leoleo.androidgithubsearch.data.domain.repository
 
 import androidx.paging.PagingData
-import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail
+import com.leoleo.androidgithubsearch.data.domain.model.RepositorySummary
 import kotlinx.coroutines.flow.Flow
 
 interface GithubRepoRepository {

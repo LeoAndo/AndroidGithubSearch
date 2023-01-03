@@ -1,6 +1,6 @@
 package com.leoleo.androidgithubsearch.data.api.response
 
-import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
+import com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail
 
 @kotlinx.serialization.Serializable
 data class RepositoryDetailResponse(

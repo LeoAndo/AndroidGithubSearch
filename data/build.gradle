@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlinx-serialization'
+}
+def localProperties = new Properties()
+try {
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+} catch (Exception e) {
+    logger.warn("Not Found local.properties: ${e.localizedMessage}")
+}
+android {
+    namespace 'com.leoleo.androidgithubsearch.data'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 29
+        targetSdk 33
+        consumerProguardFiles "consumer-rules.pro"
+        // 各productFlavorsで共通のTokenを利用する想定
+        buildConfigField("String", "GITHUB_ACCESS_TOKEN", "\"" + localProperties['GITHUB_ACCESS_TOKEN'] + "\"")
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+        }
+        stub {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+        }
+        staging {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+        }
+        production {
+            dimension "version"
+            buildConfigField "String", "GITHUB_API_DOMAIN", "\"https://api.github.com\""
+        }
+    }
+}
+
+dependencies {
+    // Network
+    def ktor_version = '2.2.1'
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$dagger_hilt_version"
+
+    // Paging
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+
+    // json
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
+}

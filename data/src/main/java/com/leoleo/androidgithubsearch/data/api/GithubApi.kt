@@ -1,11 +1,11 @@
 package com.leoleo.androidgithubsearch.data.api
 
-import com.leoleo.androidgithubsearch.BuildConfig
+import com.leoleo.androidgithubsearch.data.BuildConfig
 import com.leoleo.androidgithubsearch.data.api.response.RepositoryDetailResponse
 import com.leoleo.androidgithubsearch.data.api.response.SearchRepositoryResponse
 import com.leoleo.androidgithubsearch.data.api.response.toModel
-import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.data.domain.model.RepositoryDetail
+import com.leoleo.androidgithubsearch.data.domain.model.RepositorySummary
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*

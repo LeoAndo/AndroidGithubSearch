@@ -31,7 +31,9 @@ class KtorHandler(
                         val message =
                             format.decodeFromString<GithubErrorResponse>(errorResponse.body()).message
                         when (errorResponse.status) {
-                            HttpStatusCode.Unauthorized -> throw ApiErrorResult.UnAuthorizedError(message)
+                            HttpStatusCode.Unauthorized -> throw ApiErrorResult.UnAuthorizedError(
+                                message
+                            )
                             HttpStatusCode.NotFound -> throw ApiErrorResult.NotFoundError(message)
                             HttpStatusCode.Forbidden -> throw ApiErrorResult.ForbiddenError(message)
                             HttpStatusCode.UnprocessableEntity -> {
