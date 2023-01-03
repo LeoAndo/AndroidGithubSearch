@@ -7,6 +7,7 @@ import com.leoleo.androidgithubsearch.data.api.GithubApi
 import com.leoleo.androidgithubsearch.data.api.GithubApi.Companion.SEARCH_PER_PAGE
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.data.paging.GithubRepoPagingSource
+import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +21,7 @@ internal class GithubRepoRepositoryImpl @Inject constructor(
     override suspend fun getRepositoryDetail(
         ownerName: String,
         repositoryName: String
-    ): com.leoleo.androidgithubsearch.domain.model.RepositoryDetail =
+    ): RepositoryDetail =
         ktorHandler.dataOrThrow { api.fetchRepositoryDetail(ownerName, repositoryName) }
 
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
