@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.ui.components.*
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 
@@ -105,7 +106,7 @@ private fun DetailScreenStateless(
 @PreviewDevices
 @Composable
 private fun Prev_DetailScreen() {
-    val data = com.leoleo.androidgithubsearch.domain.model.RepositoryDetail(
+    val data = RepositoryDetail(
         name = "flutter",
         ownerAvatarUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
         stargazersCount = "147731",

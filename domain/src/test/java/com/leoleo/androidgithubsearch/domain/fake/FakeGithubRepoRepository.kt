@@ -22,7 +22,7 @@ class FakeGithubRepoRepository : GithubRepoRepository {
     var isSuccess = true
     val errorData = ApiErrorResult.NetworkError
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
-        return flowOf(PagingData.empty())
+        return flowOf<PagingData<RepositorySummary>>(PagingData.empty())
     }
 
     override suspend fun getRepositoryDetail(

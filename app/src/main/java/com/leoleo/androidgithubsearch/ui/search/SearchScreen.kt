@@ -33,6 +33,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
 import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
@@ -67,7 +68,7 @@ fun SearchScreen(
 @Composable
 private fun SearchScreenStateless(
     modifier: Modifier,
-    githubRepositories: LazyPagingItems<com.leoleo.androidgithubsearch.domain.model.RepositorySummary>,
+    githubRepositories: LazyPagingItems<RepositorySummary>,
     loadState: CombinedLoadStates,
     isSearched: Boolean,
     query: String,
@@ -173,7 +174,7 @@ private fun LazyListScope.errorContent(
 @Composable
 private fun Prev_Initial_SearchScreen() {
     val githubRepositories =
-        flowOf<PagingData<com.leoleo.androidgithubsearch.domain.model.RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
+        flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // 初期起動時のState
     val refreshState = LoadState.Loading // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
@@ -209,7 +210,7 @@ private fun Prev_Initial_SearchScreen() {
 @Composable
 private fun Prev_Loading_SearchScreen() {
     val githubRepositories =
-        flowOf<PagingData<com.leoleo.androidgithubsearch.domain.model.RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
+        flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Loading時のState
     val refreshState = LoadState.Loading // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
@@ -245,7 +246,7 @@ private fun Prev_Loading_SearchScreen() {
 @Composable
 private fun Prev_Success_Item_Empty_SearchScreen() {
     val githubRepositories =
-        flowOf<PagingData<com.leoleo.androidgithubsearch.domain.model.RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
+        flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     val refreshState = LoadState.NotLoading(endOfPaginationReached = false)
     val prependState = LoadState.NotLoading(endOfPaginationReached = true)
     val appendState = LoadState.NotLoading(endOfPaginationReached = false)
@@ -280,7 +281,7 @@ private fun Prev_Success_Item_Empty_SearchScreen() {
 @Composable
 private fun Prev_Error_SearchScreen() {
     val githubRepositories =
-        flowOf<PagingData<com.leoleo.androidgithubsearch.domain.model.RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
+        flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Air Plane Mode: Onの時のState
     val refreshState = LoadState.Error(
         error = ApiErrorResult.NetworkError
