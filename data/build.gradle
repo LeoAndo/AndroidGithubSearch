@@ -63,7 +63,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$dagger_hilt_version"
 
     // Paging
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation("androidx.paging:paging-common:$paging_common_version")
 
     // json
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"

@@ -9,8 +9,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 dependencies {
-    implementation("androidx.paging:paging-common:3.1.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
+    implementation("androidx.paging:paging-common:$paging_common_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
 
     // DI
     implementation "com.google.dagger:dagger:$dagger_hilt_version"
@@ -18,6 +18,6 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$dagger_hilt_version"
 
     // test
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
+    testImplementation("junit:junit:$junit_version")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version")
 }
