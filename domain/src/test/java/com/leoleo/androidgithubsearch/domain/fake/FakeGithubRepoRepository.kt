@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.data.repository
+package com.leoleo.androidgithubsearch.domain.fake
 
 import androidx.paging.PagingData
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
@@ -8,7 +8,7 @@ import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeGithubRepoRepositoryImpl : GithubRepoRepository {
+class FakeGithubRepoRepository : GithubRepoRepository {
     val ownerName = "flutter"
     val successData = RepositoryDetail(
         name = "flutter",
