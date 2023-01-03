@@ -46,7 +46,7 @@ class GithubApi(private val format: Json) {
         page: Int,
         perPage: Int = SEARCH_PER_PAGE,
         sort: String = "stars"
-    ): List<com.leoleo.androidgithubsearch.domain.model.RepositorySummary> {
+    ): List<RepositorySummary> {
         /*
         サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
         format.decodeFromStubData<SearchRepositoryResponse>(
@@ -70,7 +70,7 @@ class GithubApi(private val format: Json) {
     suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String
-    ): com.leoleo.androidgithubsearch.domain.model.RepositoryDetail {
+    ): RepositoryDetail {
         val response: HttpResponse = httpClient.get {
             url {
                 path("repos", ownerName, repositoryName)
