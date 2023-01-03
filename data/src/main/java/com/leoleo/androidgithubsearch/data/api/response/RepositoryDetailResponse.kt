@@ -3,7 +3,7 @@ package com.leoleo.androidgithubsearch.data.api.response
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 
 @kotlinx.serialization.Serializable
-data class RepositoryDetailResponse(
+internal data class RepositoryDetailResponse(
     val forks_count: Int,
     val id: Int,
     val language: String?,
@@ -22,8 +22,8 @@ data class RepositoryDetailResponse(
     )
 }
 
-fun RepositoryDetailResponse.toModel(): com.leoleo.androidgithubsearch.domain.model.RepositoryDetail {
-    return com.leoleo.androidgithubsearch.domain.model.RepositoryDetail(
+internal fun RepositoryDetailResponse.toModel(): RepositoryDetail {
+    return RepositoryDetail(
         name = this.name,
         ownerAvatarUrl = this.owner.avatar_url,
         stargazersCount = this.stargazers_count.toString(),

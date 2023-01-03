@@ -5,9 +5,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.leoleo.androidgithubsearch.data.api.GithubApi
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
-import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 
-class GithubRepoPagingSource(
+internal class GithubRepoPagingSource(
     private val query: String,
     private val api: GithubApi,
     private val ktorHandler: KtorHandler,

@@ -12,7 +12,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.UnknownHostException
 
-class KtorHandler(
+internal class KtorHandler(
     private val dispatcher: CoroutineDispatcher,
     private val format: Json,
 ) {

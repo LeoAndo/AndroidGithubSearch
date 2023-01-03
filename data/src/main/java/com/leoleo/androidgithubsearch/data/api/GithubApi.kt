@@ -17,7 +17,7 @@ import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class GithubApi(private val format: Json) {
+internal class GithubApi(private val format: Json) {
     private val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             defaultRequest {

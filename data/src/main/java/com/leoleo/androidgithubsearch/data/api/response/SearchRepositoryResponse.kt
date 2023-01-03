@@ -3,7 +3,7 @@ package com.leoleo.androidgithubsearch.data.api.response
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 
 @kotlinx.serialization.Serializable
-data class SearchRepositoryResponse(
+internal data class SearchRepositoryResponse(
     val incomplete_results: Boolean,
     val items: List<Item>,
     val total_count: Int
@@ -124,9 +124,9 @@ data class SearchRepositoryResponse(
     }
 }
 
-fun SearchRepositoryResponse.toModel(): List<com.leoleo.androidgithubsearch.domain.model.RepositorySummary> {
+internal fun SearchRepositoryResponse.toModel(): List<RepositorySummary> {
     return this.items.map {
-        com.leoleo.androidgithubsearch.domain.model.RepositorySummary(
+        RepositorySummary(
             id = it.id,
             name = it.name,
             ownerName = it.owner.login,
