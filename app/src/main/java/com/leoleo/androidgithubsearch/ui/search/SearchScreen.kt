@@ -87,8 +87,8 @@ private fun SearchScreenStateless(
             maxLines = 1,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = {
-                keyboardController?.hide()
                 if (query.isEmpty()) return@KeyboardActions
+                keyboardController?.hide()
                 onSearch()
             }),
             onValueChange = { onValueChange(it) },
