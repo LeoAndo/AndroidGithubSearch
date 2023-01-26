@@ -6,7 +6,7 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 [Wiki](https://github.com/LeoAndo/AndroidGithubSearch/wiki/architecture)にまとめています
 
 # 開発環境
-- IDE: Android Studio Dolphin 2021.3.1 Patch 1
+- IDE: Android Studio Electric Eel 2022.1.1
 - 動作OSバージョン: OS10.0以上
 
 # アプリ開発時の準備 (重要)
