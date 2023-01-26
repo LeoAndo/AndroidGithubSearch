@@ -32,7 +32,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.ui.components.AppSurface
 import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
@@ -155,11 +155,11 @@ private fun LazyListScope.errorContent(
     item {
         val defaultErrorMessage = throwable.localizedMessage
             ?: stringResource(id = R.string.default_error_message)
-        val message = if (throwable is ApiErrorResult) {
+        val message = if (throwable is ApiErrorType) {
             when (throwable) {
-                ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
-                is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
+                ApiErrorType.NetworkError -> stringResource(id = R.string.network_error_message)
+                is ApiErrorType.NotFoundError, is ApiErrorType.ForbiddenError, is ApiErrorType.UnAuthorizedError,
+                is ApiErrorType.UnprocessableEntity, is ApiErrorType.UnexpectedError -> {
                     defaultErrorMessage
                 }
             }
@@ -284,7 +284,7 @@ private fun Prev_Error_SearchScreen() {
         flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Air Plane Mode: Onの時のState
     val refreshState = LoadState.Error(
-        error = ApiErrorResult.NetworkError
+        error = ApiErrorType.NetworkError
     ) // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
     val appendState = LoadState.NotLoading(endOfPaginationReached = false)

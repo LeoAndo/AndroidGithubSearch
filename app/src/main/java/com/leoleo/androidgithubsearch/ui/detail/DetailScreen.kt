@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.ui.components.*
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
@@ -47,11 +47,11 @@ private fun DetailScreenStateless(
             val throwable = uiState.throwable
             val defaultErrorMessage = throwable.localizedMessage
                 ?: stringResource(id = R.string.default_error_message)
-            val message = if (throwable is ApiErrorResult) {
+            val message = if (throwable is ApiErrorType) {
                 when (throwable) {
-                    ApiErrorResult.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is ApiErrorResult.NotFoundError, is ApiErrorResult.ForbiddenError, is ApiErrorResult.UnAuthorizedError,
-                    is ApiErrorResult.UnprocessableEntity, is ApiErrorResult.UnexpectedError -> {
+                    ApiErrorType.NetworkError -> stringResource(id = R.string.network_error_message)
+                    is ApiErrorType.NotFoundError, is ApiErrorType.ForbiddenError, is ApiErrorType.UnAuthorizedError,
+                    is ApiErrorType.UnprocessableEntity, is ApiErrorType.UnexpectedError -> {
                         defaultErrorMessage
                     }
                 }

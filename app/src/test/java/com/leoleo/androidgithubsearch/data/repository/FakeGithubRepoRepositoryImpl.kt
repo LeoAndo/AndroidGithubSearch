@@ -1,7 +1,7 @@
 package com.leoleo.androidgithubsearch.data.repository
 
 import androidx.paging.PagingData
-import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import com.leoleo.androidgithubsearch.domain.repository.GithubRepoRepository
@@ -20,7 +20,7 @@ class FakeGithubRepoRepositoryImpl : GithubRepoRepository {
         language = "Dart",
     )
     var isSuccess = true
-    val errorData = ApiErrorResult.NetworkError
+    val errorData = ApiErrorType.NetworkError
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
         return flowOf<PagingData<RepositorySummary>>(PagingData.empty())
     }

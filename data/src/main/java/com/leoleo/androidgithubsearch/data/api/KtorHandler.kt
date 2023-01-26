@@ -1,7 +1,7 @@
 package com.leoleo.androidgithubsearch.data.api
 
 import com.leoleo.androidgithubsearch.data.api.response.GithubErrorResponse
-import com.leoleo.androidgithubsearch.domain.exception.ApiErrorResult
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
 import io.ktor.client.plugins.*
@@ -23,7 +23,7 @@ internal class KtorHandler(
             } catch (e: Throwable) {
                 when (e) {
                     is UnknownHostException, is HttpRequestTimeoutException, is ConnectTimeoutException, is SocketTimeoutException -> {
-                        throw ApiErrorResult.NetworkError
+                        throw ApiErrorType.NetworkError
                     }
                     // ktor: 300番台のエラー
                     is RedirectResponseException -> throw e
@@ -32,13 +32,13 @@ internal class KtorHandler(
                         val message =
                             format.decodeFromString<GithubErrorResponse>(errorResponse.body()).message
                         when (errorResponse.status) {
-                            HttpStatusCode.Unauthorized -> throw ApiErrorResult.UnAuthorizedError(
+                            HttpStatusCode.Unauthorized -> throw ApiErrorType.UnAuthorizedError(
                                 message
                             )
-                            HttpStatusCode.NotFound -> throw ApiErrorResult.NotFoundError(message)
-                            HttpStatusCode.Forbidden -> throw ApiErrorResult.ForbiddenError(message)
+                            HttpStatusCode.NotFound -> throw ApiErrorType.NotFoundError(message)
+                            HttpStatusCode.Forbidden -> throw ApiErrorType.ForbiddenError(message)
                             HttpStatusCode.UnprocessableEntity -> {
-                                throw ApiErrorResult.UnprocessableEntity(message)
+                                throw ApiErrorType.UnprocessableEntity(message)
                             }
                             else -> throw e
                         }
