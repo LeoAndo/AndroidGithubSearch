@@ -106,7 +106,7 @@ private fun SearchScreenStateless(
                             )
                         }
                     } else {
-                        items(items = githubRepositories, key = { it.id }) {
+                        items(items = githubRepositories) {
                             it?.let { item ->
                                 Card(
                                     onClick = { onClickCardItem(item.ownerName, item.name) },
