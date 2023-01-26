@@ -87,11 +87,13 @@ private fun SearchScreenStateless(
             maxLines = 1,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = {
+                if (query.isEmpty()) return@KeyboardActions
                 keyboardController?.hide()
                 onSearch()
             }),
             onValueChange = { onValueChange(it) },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = query.isEmpty()
         )
         Spacer(modifier = Modifier.size(20.dp))
         Log.d("SearchScreen", "loadState: $loadState")
