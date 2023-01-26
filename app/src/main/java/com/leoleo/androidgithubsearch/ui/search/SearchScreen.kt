@@ -159,12 +159,12 @@ private fun LazyListScope.errorContent(
             when (throwable) {
                 ApiErrorType.Network -> stringResource(id = R.string.network_error_message)
                 is ApiErrorType.NotFound, is ApiErrorType.Forbidden, is ApiErrorType.UnAuthorized,
-                is ApiErrorType.UnprocessableEntity, is ApiErrorType.Unknown -> {
+                is ApiErrorType.UnprocessableEntity, is ApiErrorType.Unknown, ApiErrorType.Redirect, ApiErrorType.Server -> {
                     defaultErrorMessage
                 }
             }
         } else {
-            throwable.localizedMessage ?: stringResource(id = R.string.default_error_message)
+            defaultErrorMessage
         }
         ErrorFullScreen(message = message, onReload = onReload)
     }

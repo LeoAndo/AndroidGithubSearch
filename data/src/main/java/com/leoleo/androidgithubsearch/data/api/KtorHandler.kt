@@ -26,7 +26,7 @@ internal class KtorHandler(
                         throw ApiErrorType.Network
                     }
                     // ktor: 300番台のエラー
-                    is RedirectResponseException -> throw e
+                    is RedirectResponseException -> throw ApiErrorType.Redirect
                     is ClientRequestException -> { // ktor: 400番台のエラー
                         val errorResponse = e.response
                         val message =
@@ -40,14 +40,14 @@ internal class KtorHandler(
                             HttpStatusCode.UnprocessableEntity -> {
                                 throw ApiErrorType.UnprocessableEntity(message)
                             }
-                            else -> throw e
+                            else -> throw ApiErrorType.Unknown(message)
                         }
                     }
                     // ktor: 500番台のエラー
-                    is ServerResponseException -> throw e
+                    is ServerResponseException -> throw ApiErrorType.Server
                     // ktor: それ以外のエラー
-                    is ResponseException -> throw e
-                    else -> throw e
+                    is ResponseException -> throw ApiErrorType.Unknown(e.localizedMessage)
+                    else -> throw ApiErrorType.Unknown(e.localizedMessage)
                 }
             }
         }
