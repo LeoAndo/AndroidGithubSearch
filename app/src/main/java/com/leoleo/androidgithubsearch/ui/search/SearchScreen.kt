@@ -157,9 +157,9 @@ private fun LazyListScope.errorContent(
             ?: stringResource(id = R.string.default_error_message)
         val message = if (throwable is ApiErrorType) {
             when (throwable) {
-                ApiErrorType.NetworkError -> stringResource(id = R.string.network_error_message)
-                is ApiErrorType.NotFoundError, is ApiErrorType.ForbiddenError, is ApiErrorType.UnAuthorizedError,
-                is ApiErrorType.UnprocessableEntity, is ApiErrorType.UnexpectedError -> {
+                ApiErrorType.Network -> stringResource(id = R.string.network_error_message)
+                is ApiErrorType.NotFound, is ApiErrorType.Forbidden, is ApiErrorType.UnAuthorized,
+                is ApiErrorType.UnprocessableEntity, is ApiErrorType.Unknown -> {
                     defaultErrorMessage
                 }
             }
@@ -284,7 +284,7 @@ private fun Prev_Error_SearchScreen() {
         flowOf<PagingData<RepositorySummary>>(PagingData.empty()).collectAsLazyPagingItems()
     // Air Plane Mode: Onの時のState
     val refreshState = LoadState.Error(
-        error = ApiErrorType.NetworkError
+        error = ApiErrorType.Network
     ) // default: endOfPaginationReached=false
     val prependState = LoadState.NotLoading(endOfPaginationReached = false)
     val appendState = LoadState.NotLoading(endOfPaginationReached = false)

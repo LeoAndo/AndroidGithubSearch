@@ -49,9 +49,9 @@ private fun DetailScreenStateless(
                 ?: stringResource(id = R.string.default_error_message)
             val message = if (throwable is ApiErrorType) {
                 when (throwable) {
-                    ApiErrorType.NetworkError -> stringResource(id = R.string.network_error_message)
-                    is ApiErrorType.NotFoundError, is ApiErrorType.ForbiddenError, is ApiErrorType.UnAuthorizedError,
-                    is ApiErrorType.UnprocessableEntity, is ApiErrorType.UnexpectedError -> {
+                    ApiErrorType.Network -> stringResource(id = R.string.network_error_message)
+                    is ApiErrorType.NotFound, is ApiErrorType.Forbidden, is ApiErrorType.UnAuthorized,
+                    is ApiErrorType.UnprocessableEntity, is ApiErrorType.Unknown -> {
                         defaultErrorMessage
                     }
                 }

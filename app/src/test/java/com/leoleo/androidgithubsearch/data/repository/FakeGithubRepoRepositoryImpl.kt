@@ -20,7 +20,7 @@ class FakeGithubRepoRepositoryImpl : GithubRepoRepository {
         language = "Dart",
     )
     var isSuccess = true
-    val errorData = ApiErrorType.NetworkError
+    val errorData = ApiErrorType.Network
     override fun searchRepositories(query: String): Flow<PagingData<RepositorySummary>> {
         return flowOf<PagingData<RepositorySummary>>(PagingData.empty())
     }

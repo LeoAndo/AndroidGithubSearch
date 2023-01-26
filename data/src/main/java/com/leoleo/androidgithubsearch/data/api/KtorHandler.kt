@@ -23,7 +23,7 @@ internal class KtorHandler(
             } catch (e: Throwable) {
                 when (e) {
                     is UnknownHostException, is HttpRequestTimeoutException, is ConnectTimeoutException, is SocketTimeoutException -> {
-                        throw ApiErrorType.NetworkError
+                        throw ApiErrorType.Network
                     }
                     // ktor: 300番台のエラー
                     is RedirectResponseException -> throw e
@@ -32,11 +32,11 @@ internal class KtorHandler(
                         val message =
                             format.decodeFromString<GithubErrorResponse>(errorResponse.body()).message
                         when (errorResponse.status) {
-                            HttpStatusCode.Unauthorized -> throw ApiErrorType.UnAuthorizedError(
+                            HttpStatusCode.Unauthorized -> throw ApiErrorType.UnAuthorized(
                                 message
                             )
-                            HttpStatusCode.NotFound -> throw ApiErrorType.NotFoundError(message)
-                            HttpStatusCode.Forbidden -> throw ApiErrorType.ForbiddenError(message)
+                            HttpStatusCode.NotFound -> throw ApiErrorType.NotFound(message)
+                            HttpStatusCode.Forbidden -> throw ApiErrorType.Forbidden(message)
                             HttpStatusCode.UnprocessableEntity -> {
                                 throw ApiErrorType.UnprocessableEntity(message)
                             }
