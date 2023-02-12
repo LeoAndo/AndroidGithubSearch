@@ -3,7 +3,7 @@ package com.leoleo.androidgithubsearch.data.api
 import com.leoleo.androidgithubsearch.data.BuildConfig
 import com.leoleo.androidgithubsearch.data.api.response.RepositoryDetailResponse
 import com.leoleo.androidgithubsearch.data.api.response.SearchRepositoryResponse
-import com.leoleo.androidgithubsearch.data.api.response.toModel
+import com.leoleo.androidgithubsearch.data.api.response.toModels
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import io.ktor.client.*
@@ -64,7 +64,7 @@ internal class GithubApi(private val format: Json) {
         }
         val data =
             format.decodeFromString<SearchRepositoryResponse>(response.body())
-        return data.toModel()
+        return data.toModels()
     }
 
     suspend fun fetchRepositoryDetail(
@@ -77,7 +77,7 @@ internal class GithubApi(private val format: Json) {
             }
         }
         val data = format.decodeFromString<RepositoryDetailResponse>(response.body())
-        return data.toModel()
+        return data.toModels()
     }
 
     companion object {

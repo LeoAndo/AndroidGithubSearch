@@ -22,7 +22,7 @@ internal data class RepositoryDetailResponse(
     )
 }
 
-internal fun RepositoryDetailResponse.toModel(): RepositoryDetail {
+internal fun RepositoryDetailResponse.toModels(): RepositoryDetail {
     return RepositoryDetail(
         name = this.name,
         ownerAvatarUrl = this.owner.avatar_url,

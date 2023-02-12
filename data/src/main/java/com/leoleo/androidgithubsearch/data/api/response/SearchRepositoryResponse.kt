@@ -124,7 +124,7 @@ internal data class SearchRepositoryResponse(
     }
 }
 
-internal fun SearchRepositoryResponse.toModel(): List<RepositorySummary> {
+internal fun SearchRepositoryResponse.toModels(): List<RepositorySummary> {
     return this.items.map {
         RepositorySummary(
             id = it.id,
