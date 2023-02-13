@@ -13,7 +13,7 @@ import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 
 @Composable
-fun ErrorFullScreen(
+fun AppError(
     modifier: Modifier = Modifier,
     message: String,
     onReload: () -> Unit,
@@ -21,7 +21,7 @@ fun ErrorFullScreen(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
     ) {
         Text(text = message, color = MaterialTheme.colorScheme.error)
         Spacer(modifier = Modifier.height(24.dp))
@@ -33,11 +33,12 @@ fun ErrorFullScreen(
 
 @PreviewDevices
 @Composable
-private fun Prev_ErrorFullScreen() {
+private fun Prev_AppError() {
     AppSurface {
-        ErrorFullScreen(
+        AppError(
             message = "Could not load.",
             onReload = {},
+            modifier = Modifier.fillMaxSize()
         )
     }
 }

@@ -42,7 +42,7 @@ private fun DetailScreenStateless(
 ) {
     when (uiState) {
         UiState.Initial -> {}
-        UiState.Loading -> LoadingFullScreen()
+        UiState.Loading -> AppLoading(modifier = Modifier.fillMaxSize())
         is UiState.Error -> {
             val throwable = uiState.throwable
             val defaultErrorMessage = throwable.localizedMessage
@@ -58,7 +58,7 @@ private fun DetailScreenStateless(
             } else {
                 defaultErrorMessage
             }
-            ErrorFullScreen(message = message, onReload = onReload)
+            AppError(message = message, onReload = onReload, modifier = Modifier.fillMaxSize())
             AppAlertDialog(
                 titleText = stringResource(id = R.string.app_name),
                 messageText = message,
@@ -69,7 +69,7 @@ private fun DetailScreenStateless(
             Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 val data = uiState.repositoryDetail
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    NetworkImage(
+                    AppNetworkImage(
                         imageUrl = data.ownerAvatarUrl,
                         contentDescription = stringResource(R.string.content_description_owner_avatar_icon),
                         modifier = Modifier.size(60.dp),

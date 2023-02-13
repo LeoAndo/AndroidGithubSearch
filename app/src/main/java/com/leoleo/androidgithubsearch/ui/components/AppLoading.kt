@@ -9,10 +9,9 @@ import androidx.compose.ui.Modifier
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 
 @Composable
-fun LoadingFullScreen(modifier: Modifier = Modifier) {
+fun AppLoading(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .fillMaxSize(),
+        modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
@@ -21,8 +20,8 @@ fun LoadingFullScreen(modifier: Modifier = Modifier) {
 
 @PreviewDevices
 @Composable
-private fun Prev_LoadingFullScreen() {
+private fun Prev_AppLoading() {
     AppSurface {
-        LoadingFullScreen()
+        AppLoading(modifier = Modifier.fillMaxSize())
     }
 }

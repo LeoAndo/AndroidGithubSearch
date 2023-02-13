@@ -34,9 +34,9 @@ import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
+import com.leoleo.androidgithubsearch.ui.components.AppError
+import com.leoleo.androidgithubsearch.ui.components.AppLoading
 import com.leoleo.androidgithubsearch.ui.components.AppSurface
-import com.leoleo.androidgithubsearch.ui.components.ErrorFullScreen
-import com.leoleo.androidgithubsearch.ui.components.LoadingFullScreen
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 import kotlinx.coroutines.flow.flowOf
 
@@ -95,16 +95,17 @@ private fun SearchScreenStateless(
             modifier = Modifier.fillMaxWidth(),
             isError = query.isEmpty()
         )
-        Spacer(modifier = Modifier.size(20.dp))
+        Spacer(modifier = Modifier.size(12.dp))
         Log.d("SearchScreen", "loadState: $loadState")
         LazyColumn {
             when (val state = loadState.refresh) {
                 is LoadState.NotLoading -> {
                     if (githubRepositories.itemCount == 0) {
                         item {
-                            ErrorFullScreen(
+                            AppError(
                                 message = stringResource(id = R.string.empty_message),
                                 onReload = { onSearch() },
+                                modifier = Modifier.fillMaxSize(),
                             )
                         }
                     } else {
@@ -136,14 +137,14 @@ private fun SearchScreenStateless(
                     }
                 }
                 is LoadState.Loading -> {
-                    if (isSearched) item { LoadingFullScreen() }
+                    if (isSearched) item { AppLoading(modifier = Modifier.fillMaxSize()) }
                 }
                 is LoadState.Error -> errorContent(throwable = state.error, onReload = onSearch)
             }
 
             when (val state = loadState.append) {
                 is LoadState.NotLoading -> Unit
-                is LoadState.Loading -> item { LoadingFullScreen() }
+                is LoadState.Loading -> item { AppLoading(modifier = Modifier.fillMaxSize()) }
                 is LoadState.Error -> errorContent(throwable = state.error, onReload = onSearch)
             }
         }
@@ -168,7 +169,7 @@ private fun LazyListScope.errorContent(
         } else {
             defaultErrorMessage
         }
-        ErrorFullScreen(message = message, onReload = onReload)
+        AppError(message = message, onReload = onReload, modifier = Modifier.fillMaxSize())
     }
 }
 

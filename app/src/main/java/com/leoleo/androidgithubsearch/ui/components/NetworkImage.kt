@@ -20,7 +20,7 @@ import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun NetworkImage(
+fun AppNetworkImage(
     modifier: Modifier = Modifier,
     imageUrl: String,
     contentDescription: String = stringResource(id = R.string.no_content_description),
@@ -45,7 +45,7 @@ fun NetworkImage(
 
 @PreviewPhoneDevice
 @Composable
-fun Prev_NetworkImage_Default() {
+fun Prev_AppNetworkImage_Default() {
     AppSurface {
         Column(
             modifier = Modifier
@@ -53,7 +53,7 @@ fun Prev_NetworkImage_Default() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            NetworkImage(
+            AppNetworkImage(
                 imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
                 contentDescription = "flutter owner icon",
                 modifier = Modifier.size(60.dp),
@@ -64,7 +64,7 @@ fun Prev_NetworkImage_Default() {
 
 @PreviewPhoneDevice
 @Composable
-fun Prev_NetworkImage_CircleCrop() {
+fun Prev_AppNetworkImage_CircleCrop() {
     AppSurface {
         Column(
             modifier = Modifier
@@ -72,7 +72,7 @@ fun Prev_NetworkImage_CircleCrop() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            NetworkImage(
+            AppNetworkImage(
                 imageUrl = "https://avatars.githubusercontent.com/u/14101776?v=4",
                 contentDescription = "flutter owner icon",
                 modifier = Modifier
