@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
-import com.leoleo.androidgithubsearch.ui.components.AppSurface
+import com.leoleo.androidgithubsearch.ui.component.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 import com.leoleo.androidgithubsearch.ui.util.AppLaunchHelper
 

@@ -34,9 +34,9 @@ import androidx.paging.compose.items
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
-import com.leoleo.androidgithubsearch.ui.components.AppError
-import com.leoleo.androidgithubsearch.ui.components.AppLoading
-import com.leoleo.androidgithubsearch.ui.components.AppSurface
+import com.leoleo.androidgithubsearch.ui.component.AppError
+import com.leoleo.androidgithubsearch.ui.component.AppLoading
+import com.leoleo.androidgithubsearch.ui.component.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 import kotlinx.coroutines.flow.flowOf
 

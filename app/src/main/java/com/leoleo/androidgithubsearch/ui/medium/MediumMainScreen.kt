@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.testTag
-import com.leoleo.androidgithubsearch.ui.components.AppSurface
+import com.leoleo.androidgithubsearch.ui.component.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewTabletDevice
 
 @Composable

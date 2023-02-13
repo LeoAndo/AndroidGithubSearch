@@ -14,7 +14,7 @@ import coil.transform.CircleCropTransformation
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.ui.components.*
+import com.leoleo.androidgithubsearch.ui.component.*
 import com.leoleo.androidgithubsearch.ui.preview.PreviewDevices
 
 @Composable

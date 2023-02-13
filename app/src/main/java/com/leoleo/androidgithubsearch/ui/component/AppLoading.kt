@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.ui.components
+package com.leoleo.androidgithubsearch.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

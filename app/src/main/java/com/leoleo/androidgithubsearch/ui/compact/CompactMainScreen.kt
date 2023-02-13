@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.MyNavHost
 import com.leoleo.androidgithubsearch.ui.TopDestinations
-import com.leoleo.androidgithubsearch.ui.components.AppSurface
+import com.leoleo.androidgithubsearch.ui.component.AppSurface
 
 @Composable
 fun CompactMainScreen() {

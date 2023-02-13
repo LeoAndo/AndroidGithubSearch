@@ -1,4 +1,4 @@
-package com.leoleo.androidgithubsearch.ui.components
+package com.leoleo.androidgithubsearch.ui.component
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
