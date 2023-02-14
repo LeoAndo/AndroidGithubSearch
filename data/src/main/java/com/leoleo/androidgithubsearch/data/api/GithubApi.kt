@@ -3,9 +3,6 @@ package com.leoleo.androidgithubsearch.data.api
 import com.leoleo.androidgithubsearch.data.BuildConfig
 import com.leoleo.androidgithubsearch.data.api.response.RepositoryDetailResponse
 import com.leoleo.androidgithubsearch.data.api.response.SearchRepositoryResponse
-import com.leoleo.androidgithubsearch.data.api.response.toModels
-import com.leoleo.androidgithubsearch.domain.model.RepositoryDetail
-import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -46,14 +43,14 @@ internal class GithubApi(private val format: Json) {
         page: Int,
         perPage: Int = SEARCH_PER_PAGE,
         sort: String = "stars"
-    ): List<RepositorySummary> {
+    ): SearchRepositoryResponse {
         /*
         サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
-        format.decodeFromStubData<SearchRepositoryResponse>(
+        return format.decodeFromStubData<SearchRepositoryResponse>(
             context,
             format,
             "search_repositories_success.json"
-        ).toModel()
+        )
          */
         val response: HttpResponse = httpClient.get {
             url { path("search", "repositories") }
@@ -62,22 +59,19 @@ internal class GithubApi(private val format: Json) {
             parameter("per_page", perPage)
             parameter("sort", sort)
         }
-        val data =
-            format.decodeFromString<SearchRepositoryResponse>(response.body())
-        return data.toModels()
+        return format.decodeFromString(response.body())
     }
 
     suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String
-    ): RepositoryDetail {
+    ): RepositoryDetailResponse {
         val response: HttpResponse = httpClient.get {
             url {
                 path("repos", ownerName, repositoryName)
             }
         }
-        val data = format.decodeFromString<RepositoryDetailResponse>(response.body())
-        return data.toModels()
+        return format.decodeFromString(response.body())
     }
 
     companion object {
