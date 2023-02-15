@@ -59,56 +59,54 @@ private fun ExpandedMainScreenStateless(
         }
     }
 
-    AppSurface {
-        DismissibleNavigationDrawer(
-            drawerState = drawerState,
-            drawerContent = {
-                DismissibleDrawerSheet {
-                    Spacer(Modifier.height(12.dp))
-                    items.forEach { item ->
-                        NavigationDrawerItem(
-                            icon = { Icon(item.icon, contentDescription = item.label) },
-                            label = { Text(item.label) },
-                            selected = item == selectedItem,
-                            onClick = {
-                                scope.launch { drawerState.close() }
-                                onClickDrawerItem(item)
-                            },
-                            modifier = Modifier.padding(horizontal = 12.dp)
-                        )
-                    }
-                }
-            },
-            content = {
-                when (Page.values().firstOrNull { it.ordinal == selectedItem.ordinal }) {
-                    Page.HOME -> {
-                        HomeScreen(modifier, drawerState, onClickDrawerControlBtn = {
-                            scope.launch {
-                                if (drawerState.isClosed) {
-                                    drawerState.open()
-                                } else {
-                                    drawerState.close()
-                                }
-                            }
-                        })
-                    }
-                    Page.SEARCH -> {
-                        MyNavHost(
-                            startDestination = TopDestinations.SearchRoute.routeName,
-                            modifier = modifier
-                        )
-                    }
-                    Page.User -> UserScreen(modifier)
-                    null -> Text(
-                        text = "$selectedItem is unknown.",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
+    DismissibleNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DismissibleDrawerSheet {
+                Spacer(Modifier.height(12.dp))
+                items.forEach { item ->
+                    NavigationDrawerItem(
+                        icon = { Icon(item.icon, contentDescription = item.label) },
+                        label = { Text(item.label) },
+                        selected = item == selectedItem,
+                        onClick = {
+                            scope.launch { drawerState.close() }
+                            onClickDrawerItem(item)
+                        },
+                        modifier = Modifier.padding(horizontal = 12.dp)
                     )
                 }
             }
-        )
-    }
+        },
+        content = {
+            when (Page.values().firstOrNull { it.ordinal == selectedItem.ordinal }) {
+                Page.HOME -> {
+                    HomeScreen(modifier, drawerState, onClickDrawerControlBtn = {
+                        scope.launch {
+                            if (drawerState.isClosed) {
+                                drawerState.open()
+                            } else {
+                                drawerState.close()
+                            }
+                        }
+                    })
+                }
+                Page.SEARCH -> {
+                    MyNavHost(
+                        startDestination = TopDestinations.SearchRoute.routeName,
+                        modifier = modifier
+                    )
+                }
+                Page.User -> UserScreen(modifier)
+                null -> Text(
+                    text = "$selectedItem is unknown.",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .wrapContentSize()
+                )
+            }
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

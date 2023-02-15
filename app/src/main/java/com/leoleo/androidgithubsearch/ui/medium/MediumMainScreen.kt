@@ -1,24 +1,26 @@
 package com.leoleo.androidgithubsearch.ui.medium
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.MyNavHost
 import com.leoleo.androidgithubsearch.ui.Page
 import com.leoleo.androidgithubsearch.ui.TopDestinations
-import com.leoleo.androidgithubsearch.ui.user.UserScreen
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.testTag
 import com.leoleo.androidgithubsearch.ui.component.AppSurface
 import com.leoleo.androidgithubsearch.ui.preview.PreviewTabletDevice
+import com.leoleo.androidgithubsearch.ui.user.UserScreen
 
 @Composable
 fun MediumMainScreen() {
@@ -41,35 +43,33 @@ private fun MediumMainScreenStateless(
     selectedItem: Page,
     onClickNavigationRailItem: (Page) -> Unit,
 ) {
-    AppSurface {
-        Row {
-            NavigationRail {
-                Page.values().forEachIndexed { _, item ->
-                    NavigationRailItem(
-                        icon = { Icon(item.icon, contentDescription = item.label) },
-                        label = { Text(item.label) },
-                        selected = selectedItem == item,
-                        onClick = { onClickNavigationRailItem(item) },
-                        modifier = Modifier.testTag(item.label)
-                    )
-                }
-            }
-            when (Page.values().firstOrNull { it == selectedItem }) {
-                Page.HOME -> HomeScreen(modifier)
-                Page.SEARCH -> {
-                    MyNavHost(
-                        startDestination = TopDestinations.SearchRoute.routeName,
-                        modifier = modifier
-                    )
-                }
-                Page.User -> UserScreen(modifier)
-                null -> Text(
-                    text = "$selectedItem is unknown.",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentSize()
+    Row {
+        NavigationRail {
+            Page.values().forEachIndexed { _, item ->
+                NavigationRailItem(
+                    icon = { Icon(item.icon, contentDescription = item.label) },
+                    label = { Text(item.label) },
+                    selected = selectedItem == item,
+                    onClick = { onClickNavigationRailItem(item) },
+                    modifier = Modifier.testTag(item.label)
                 )
             }
+        }
+        when (Page.values().firstOrNull { it == selectedItem }) {
+            Page.HOME -> HomeScreen(modifier)
+            Page.SEARCH -> {
+                MyNavHost(
+                    startDestination = TopDestinations.SearchRoute.routeName,
+                    modifier = modifier
+                )
+            }
+            Page.User -> UserScreen(modifier)
+            null -> Text(
+                text = "$selectedItem is unknown.",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize()
+            )
         }
     }
 }
