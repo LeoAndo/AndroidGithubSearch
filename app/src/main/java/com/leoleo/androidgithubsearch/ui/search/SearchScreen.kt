@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     navigateToDetailScreen: (String, String) -> Unit,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
@@ -50,7 +50,10 @@ fun SearchScreen(
     var isSearched by rememberSaveable { mutableStateOf(false) } // TODO: このフラグ消したい.
     val githubRepositories = viewModel.githubRepositories.collectAsLazyPagingItems()
     SearchScreenStateless(
-        modifier = modifier.testTag(stringResource(id = R.string.test_tag_search_screen)),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(12.dp)
+            .testTag(stringResource(id = R.string.test_tag_search_screen)),
         githubRepositories = githubRepositories,
         loadState = githubRepositories.loadState,
         isSearched = isSearched,
@@ -67,7 +70,7 @@ fun SearchScreen(
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchScreenStateless(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     githubRepositories: LazyPagingItems<RepositorySummary>,
     loadState: CombinedLoadStates,
     isSearched: Boolean,
