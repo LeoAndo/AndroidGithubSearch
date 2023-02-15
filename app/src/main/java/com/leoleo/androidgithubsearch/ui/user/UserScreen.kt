@@ -16,7 +16,7 @@ import com.leoleo.androidgithubsearch.ui.util.AppLaunchHelper
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserScreen(modifier: Modifier) {
+fun UserScreen(modifier: Modifier = Modifier) {
     val items = listOf("Twitter", "Instagram", "Github")
     val twitterUrl = stringResource(R.string.my_twitter_url)
     val instagramUrl = stringResource(R.string.my_instagram_url)

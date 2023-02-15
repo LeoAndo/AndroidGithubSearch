@@ -46,7 +46,7 @@ fun ExpandedMainScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ExpandedMainScreenStateless(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     drawerState: DrawerState,
     scope: CoroutineScope,
     selectedItem: Page,
@@ -92,10 +92,7 @@ private fun ExpandedMainScreenStateless(
                     })
                 }
                 Page.SEARCH -> {
-                    MyNavHost(
-                        startDestination = TopDestinations.SearchRoute.routeName,
-                        modifier = modifier
-                    )
+                    MyNavHost(startDestination = TopDestinations.SearchRoute.routeName)
                 }
                 Page.User -> UserScreen(modifier)
                 null -> Text(
@@ -112,7 +109,7 @@ private fun ExpandedMainScreenStateless(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     drawerState: DrawerState,
     onClickDrawerControlBtn: () -> Unit,
 ) {

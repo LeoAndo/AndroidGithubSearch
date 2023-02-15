@@ -28,9 +28,9 @@ fun MediumMainScreen() {
     var selectedItem by rememberSaveable { mutableStateOf(items[0]) }
     MediumMainScreenStateless(
         modifier = Modifier
+            .testTag(stringResource(id = R.string.test_tag_medium_main_screen))
             .fillMaxSize()
-            .padding(12.dp)
-            .testTag(stringResource(id = R.string.test_tag_medium_main_screen)),
+            .padding(12.dp),
         selectedItem = selectedItem,
         onClickNavigationRailItem = { item ->
             selectedItem = item
@@ -39,7 +39,7 @@ fun MediumMainScreen() {
 
 @Composable
 private fun MediumMainScreenStateless(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     selectedItem: Page,
     onClickNavigationRailItem: (Page) -> Unit,
 ) {
@@ -51,17 +51,16 @@ private fun MediumMainScreenStateless(
                     label = { Text(item.label) },
                     selected = selectedItem == item,
                     onClick = { onClickNavigationRailItem(item) },
-                    modifier = Modifier.testTag(item.label)
+                    modifier = Modifier
+                        .testTag(item.label)
+                        .padding(12.dp)
                 )
             }
         }
         when (Page.values().firstOrNull { it == selectedItem }) {
             Page.HOME -> HomeScreen(modifier)
             Page.SEARCH -> {
-                MyNavHost(
-                    startDestination = TopDestinations.SearchRoute.routeName,
-                    modifier = modifier
-                )
+                MyNavHost(startDestination = TopDestinations.SearchRoute.routeName)
             }
             Page.User -> UserScreen(modifier)
             null -> Text(
@@ -75,7 +74,7 @@ private fun MediumMainScreenStateless(
 }
 
 @Composable
-private fun HomeScreen(modifier: Modifier) {
+private fun HomeScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(20.dp),
