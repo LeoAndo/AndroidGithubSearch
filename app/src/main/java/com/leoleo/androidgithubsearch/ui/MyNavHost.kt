@@ -1,7 +1,6 @@
 package com.leoleo.androidgithubsearch.ui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -24,7 +23,7 @@ fun MyNavHost(
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier
     ) {
         // nest navigation
         navigation(
@@ -35,7 +34,6 @@ fun MyNavHost(
                 route = GithubRepoSearchDestinations.TopRoute.routeName,
                 content = {
                     SearchScreen(
-                        modifier = modifier,
                         navigateToDetailScreen = { ownerName, name ->
                             navController.navigate(
                                 GithubRepoSearchDestinations.DetailRoute.withArgs(
@@ -63,7 +61,6 @@ fun MyNavHost(
                     val ownerName = it.arguments?.getString(ARG_KEY_OWNER_NAME) ?: return@composable
                     val name = it.arguments?.getString(ARG_KEY_NAME) ?: return@composable
                     DetailScreen(
-                        modifier = modifier,
                         ownerName = ownerName,
                         name = name,
                     )
