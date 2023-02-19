@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import com.leoleo.androidgithubsearch.data.api.GithubApi
 import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.data.api.response.toModels
+import com.leoleo.androidgithubsearch.domain.exception.ValidationErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 
 internal class GithubRepoPagingSource(
@@ -25,6 +26,9 @@ internal class GithubRepoPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepositorySummary> {
         return try {
+            if (query.isEmpty()) {
+                throw ValidationErrorType.Input("please input search word.")
+            }
             val pageNumber = params.key ?: INIT_PAGE_NO
             val size = params.loadSize
             val from = pageNumber * size
