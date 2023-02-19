@@ -42,7 +42,7 @@ android {
     composeOptions {
         // Kotlin Versionとの互換性マップ
         // https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-        kotlinCompilerExtensionVersion '1.3.2'
+        kotlinCompilerExtensionVersion '1.4.2'
     }
     packagingOptions {
         resources {
@@ -109,7 +109,7 @@ dependencies {
     implementation "io.coil-kt:coil-compose:2.2.2"
 
     // Paging
-    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha18"
 
     // responsive UI for larger screens
     implementation 'androidx.compose.material3:material3-window-size-class'
