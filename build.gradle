@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        dagger_hilt_version = '2.44.2'
+        dagger_hilt_version = '2.45'
         paging_common_version = '3.1.1' // androidx.paging:paging-compose内部で使っているversionを指定
         junit_version = '4.13.2'
         coroutines_test_version = '1.5.2'
