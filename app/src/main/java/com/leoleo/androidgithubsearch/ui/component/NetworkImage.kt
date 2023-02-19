@@ -9,16 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import coil.transform.Transformation
 import com.leoleo.androidgithubsearch.R
 import com.leoleo.androidgithubsearch.ui.preview.PreviewPhoneDevice
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun AppNetworkImage(
     modifier: Modifier = Modifier,
@@ -27,15 +27,15 @@ fun AppNetworkImage(
     transformations: List<Transformation> = emptyList(),
 ) {
     Image(
-        painter = rememberImagePainter(
-            data = imageUrl,
-            builder = {
-                crossfade(true)
-                placeholder(drawableResId = R.drawable.placeholder_image)
-                error(drawableResId = R.drawable.error_image)
-                fallback(drawableResId = R.drawable.fallback_image)
-                transformations(transformations)
-            }
+        painter = rememberAsyncImagePainter(
+            ImageRequest.Builder(LocalContext.current).data(data = imageUrl)
+                .apply(block = fun ImageRequest.Builder.() {
+                    crossfade(true)
+                    placeholder(drawableResId = R.drawable.placeholder_image)
+                    error(drawableResId = R.drawable.error_image)
+                    fallback(drawableResId = R.drawable.fallback_image)
+                    transformations(transformations)
+                }).build()
         ),
         contentDescription = contentDescription,
         modifier = modifier,
