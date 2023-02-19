@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main", "develop", /^release\/.*$/ ]
+    branches: [ "main", "develop", /^release\-.*$/ ]
   pull_request:
-    branches: [ "main", "develop", /^release\/.*$/ ]
+    branches: [ "main", "develop", /^release\-.*$/ ]
 
 jobs:
   build:
@@ -22,7 +22,9 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: assembleDebug with Gradle
+      run: ./gradlew assembleDebug
+    - name: test with Gradle
+      run: ./gradlew test
       
       
