@@ -19,8 +19,5 @@ internal object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideKtorHandler(
-        @IoDispatcher dispatcher: CoroutineDispatcher,
-        format: Json
-    ): KtorHandler = KtorHandler(dispatcher, format)
+    fun provideKtorHandler(): KtorHandler = KtorHandler()
 }
