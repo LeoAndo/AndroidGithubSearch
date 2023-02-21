@@ -63,6 +63,7 @@ internal class GithubApi(private val format: Json, private val ktorHandler: Ktor
         }
     }
 
+    @kotlin.jvm.Throws(ApiErrorType::class)
     suspend fun searchRepositories(
         query: String,
         page: Int,
@@ -87,6 +88,7 @@ internal class GithubApi(private val format: Json, private val ktorHandler: Ktor
         return format.decodeFromString(response.body())
     }
 
+    @kotlin.jvm.Throws(ApiErrorType::class)
     suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String
