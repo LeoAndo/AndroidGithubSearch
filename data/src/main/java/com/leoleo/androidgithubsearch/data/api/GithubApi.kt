@@ -1,8 +1,10 @@
 package com.leoleo.androidgithubsearch.data.api
 
 import com.leoleo.androidgithubsearch.data.BuildConfig
+import com.leoleo.androidgithubsearch.data.api.response.GithubErrorResponse
 import com.leoleo.androidgithubsearch.data.api.response.RepositoryDetailResponse
 import com.leoleo.androidgithubsearch.data.api.response.SearchRepositoryResponse
+import com.leoleo.androidgithubsearch.domain.exception.ApiErrorType
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -14,7 +16,7 @@ import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-internal class GithubApi(private val format: Json) {
+internal class GithubApi(private val format: Json, private val ktorHandler: KtorHandler) {
     private val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             defaultRequest {
@@ -34,10 +36,34 @@ internal class GithubApi(private val format: Json) {
                 logger = AppHttpLogger()
                 level = LogLevel.BODY
             }
-            expectSuccess = true
+            expectSuccess = true // HttpResponseValidatorで必要な設定.
+            HttpResponseValidator {
+                handleResponseExceptionWithRequest { e, _ ->
+                    when (e) {
+                        is ClientRequestException -> { // ktor: 400番台のエラー
+                            val errorResponse = e.response
+                            val message =
+                                format.decodeFromString<GithubErrorResponse>(errorResponse.body()).message
+                            when (errorResponse.status) {
+                                HttpStatusCode.Unauthorized -> throw ApiErrorType.UnAuthorized(
+                                    message
+                                )
+                                HttpStatusCode.NotFound -> throw ApiErrorType.NotFound(message)
+                                HttpStatusCode.Forbidden -> throw ApiErrorType.Forbidden(message)
+                                HttpStatusCode.UnprocessableEntity -> {
+                                    throw ApiErrorType.UnprocessableEntity(message)
+                                }
+                                else -> throw ApiErrorType.Unknown(message)
+                            }
+                        }
+                        else -> ktorHandler.handleResponseException(e)
+                    }
+                }
+            }
         }
     }
 
+    @kotlin.jvm.Throws(ApiErrorType::class)
     suspend fun searchRepositories(
         query: String,
         page: Int,
@@ -45,12 +71,12 @@ internal class GithubApi(private val format: Json) {
         sort: String = "stars"
     ): SearchRepositoryResponse {
         /*
-        サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
-        return format.decodeFromStubData<SearchRepositoryResponse>(
-            context,
-            format,
-            "search_repositories_success.json"
-        )
+            // サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
+            return format.decodeFromStubData<SearchRepositoryResponse>(
+                context,
+                format,
+                "search_repositories_success.json"
+            )
          */
         val response: HttpResponse = httpClient.get {
             url { path("search", "repositories") }
@@ -62,6 +88,7 @@ internal class GithubApi(private val format: Json) {
         return format.decodeFromString(response.body())
     }
 
+    @kotlin.jvm.Throws(ApiErrorType::class)
     suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String

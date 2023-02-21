@@ -1,6 +1,7 @@
 package com.leoleo.androidgithubsearch.data.di
 
 import com.leoleo.androidgithubsearch.data.api.GithubApi
+import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +23,6 @@ import javax.inject.Singleton
 internal object DataSourceModule {
     @Singleton
     @Provides
-    fun provideGithubService(format: Json): GithubApi = GithubApi(format)
+    fun provideGithubService(format: Json, ktorHandler: KtorHandler): GithubApi =
+        GithubApi(format, ktorHandler)
 }
