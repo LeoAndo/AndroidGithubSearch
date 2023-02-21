@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.leoleo.androidgithubsearch.data.api.GithubApi
-import com.leoleo.androidgithubsearch.data.api.KtorHandler
 import com.leoleo.androidgithubsearch.data.api.response.toModels
 import com.leoleo.androidgithubsearch.domain.exception.ValidationErrorType
 import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
@@ -12,7 +11,6 @@ import com.leoleo.androidgithubsearch.domain.model.RepositorySummary
 internal class GithubRepoPagingSource(
     private val query: String,
     private val api: GithubApi,
-    private val ktorHandler: KtorHandler,
 ) : PagingSource<Int, RepositorySummary>() {
 
     override fun getRefreshKey(state: PagingState<Int, RepositorySummary>): Int? {
@@ -33,10 +31,7 @@ internal class GithubRepoPagingSource(
             val size = params.loadSize
             val from = pageNumber * size
             val placeholdersEnabled = params.placeholdersEnabled
-            val data =
-                ktorHandler.dataOrThrow {
-                    api.searchRepositories(query = query, page = pageNumber).toModels()
-                }
+            val data = api.searchRepositories(query = query, page = pageNumber).toModels()
             // Since {INIT_PAGE_NO} is the lowest page number, return null to signify no more pages should
             // be loaded before it.
             val prevKey = if (pageNumber > INIT_PAGE_NO) pageNumber - 1 else null
