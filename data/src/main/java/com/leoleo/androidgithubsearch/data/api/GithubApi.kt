@@ -14,7 +14,7 @@ import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-internal class GithubApi(private val format: Json) {
+internal class GithubApi(private val format: Json, private val ktorHandler: KtorHandler) {
     private val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             defaultRequest {
@@ -44,34 +44,38 @@ internal class GithubApi(private val format: Json) {
         perPage: Int = SEARCH_PER_PAGE,
         sort: String = "stars"
     ): SearchRepositoryResponse {
-        /*
-        サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
-        return format.decodeFromStubData<SearchRepositoryResponse>(
-            context,
-            format,
-            "search_repositories_success.json"
-        )
-         */
-        val response: HttpResponse = httpClient.get {
-            url { path("search", "repositories") }
-            parameter("q", query)
-            parameter("page", page)
-            parameter("per_page", perPage)
-            parameter("sort", sort)
+        return ktorHandler.dataOrThrow {
+            /*
+                // サーバーサイドのAPI開発が完了するまではFlavorをstubにし、開発を進める.
+                format.decodeFromStubData<SearchRepositoryResponse>(
+                    context,
+                    format,
+                    "search_repositories_success.json"
+                )
+             */
+            val response: HttpResponse = httpClient.get {
+                url { path("search", "repositories") }
+                parameter("q", query)
+                parameter("page", page)
+                parameter("per_page", perPage)
+                parameter("sort", sort)
+            }
+            format.decodeFromString(response.body())
         }
-        return format.decodeFromString(response.body())
     }
 
     suspend fun fetchRepositoryDetail(
         ownerName: String,
         repositoryName: String
     ): RepositoryDetailResponse {
-        val response: HttpResponse = httpClient.get {
-            url {
-                path("repos", ownerName, repositoryName)
+        return ktorHandler.dataOrThrow {
+            val response: HttpResponse = httpClient.get {
+                url {
+                    path("repos", ownerName, repositoryName)
+                }
             }
+            format.decodeFromString(response.body())
         }
-        return format.decodeFromString(response.body())
     }
 
     companion object {
