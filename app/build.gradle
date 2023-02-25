@@ -4,7 +4,12 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
 }
-
+def localProperties = new Properties()
+try {
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+} catch (Exception e) {
+    logger.warn("Not Found local.properties: ${e.localizedMessage}")
+}
 android {
     namespace 'com.leoleo.androidgithubsearch'
     compileSdk 33
@@ -13,8 +18,8 @@ android {
         applicationId "com.leoleo.androidgithubsearch"
         minSdk 29
         targetSdk 33
-        versionCode 104
-        versionName "1.0.4"
+        versionCode 106
+        versionName "1.0.6"
 
         testInstrumentationRunner "com.leoleo.androidgithubsearch.CustomTestRunner"
         vectorDrawables {
@@ -22,8 +27,20 @@ android {
         }
     }
 
-    buildTypes {
+    signingConfigs {
+        debug { storeFile rootProject.file('debug.keystore') }
         release {
+            storeFile rootProject.file('release.keystore')
+            storePassword localProperties['ANDROID_STORE_PASSWORD']
+            keyAlias localProperties['ANDROID_KEY_ALIAS']
+            keyPassword localProperties['ANDROID_KEY_PASSWORD']
+        }
+    }
+
+    buildTypes {
+        debug { signingConfig signingConfigs.debug }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
