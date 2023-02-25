@@ -16,12 +16,8 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         setContent {
-            val a = "" // わざとLint warning出す。
             val windowSizeClass = calculateWindowSizeClass(this)
             MainScreen(windowSizeClass.widthSizeClass)
-        }
-        this.addOnContextAvailableListener { ctx ->
-
         }
     }
 }
