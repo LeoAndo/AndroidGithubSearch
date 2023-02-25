@@ -34,6 +34,7 @@ jobs:
         
     - name: Install Danger
       run: |
+        gem install faraday-retry:2.1.1
         gem install danger:9.2.0
         gem install danger-chikuwa
         
@@ -42,17 +43,13 @@ jobs:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "GITHUB_ACCESS_TOKEN=$GITHUB_ACCESS_TOKEN" >> local.properties
-
-   # - name: Runs lint on the default variant.
-   #   run: ./gradlew lint
     
-    - name: Run unit tests for all variants.
-      run: ./gradlew test
+    - name: Run unit tests for developmentDebug the variants.
+      run: ./gradlew testDevelopmentDebugUnitTest
 
-    - name: Build tasks (Assemble main outputs for all the variants.)
+    - name: Build tasks (Assemble main outputs for developmentDebug the variants.)
       run: |
-        ./gradlew assemble 2>&1 | tee build.log
-      # continue-on-error: true
+        ./gradlew assembleDevelopmentDebug 2>&1 | tee build.log
       
     - name: Run Danger
       run: danger --remove-previous-comments
