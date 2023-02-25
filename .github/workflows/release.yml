@@ -20,11 +20,20 @@ jobs:
         distribution: 'temurin'
         cache: gradle
         
+    - name: Create release.keystore
+      run: echo "${{ secrets.ANDROID_STORE_BASE64 }}" | base64 -d > release.keystore
+
     - name: Create local.properties
       env:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+        ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
       run: |
         echo "GITHUB_ACCESS_TOKEN=$GITHUB_ACCESS_TOKEN" >> local.properties
+        echo "ANDROID_STORE_PASSWORD=$ANDROID_STORE_PASSWORD" >> local.properties
+        echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS" >> local.properties
+        echo "ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> local.properties
 
     - name: Release Build tasks (apk and aab)
       run: |
