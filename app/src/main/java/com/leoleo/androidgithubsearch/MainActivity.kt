@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             val windowSizeClass = calculateWindowSizeClass(this)
             MainScreen(windowSizeClass.widthSizeClass)
         }
-        this.addOnContextAvailableListener { context ->
+        this.addOnContextAvailableListener { ctx ->
 
         }
     }
