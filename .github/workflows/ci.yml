@@ -75,12 +75,3 @@ jobs:
       with:
         name: build-reports
         path: app/build/reports
-    
-    # https://github.com/softprops/action-gh-release#%EF%B8%8F-uploading-release-assets
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        files: |
-          app/build/outputs
-          # app/build/reports
