@@ -46,7 +46,7 @@ jobs:
 
     - name: Build tasks (Assemble main outputs for developmentDebug the variants.)
       run: |
-        ./gradlew assembleDevelopmentDebug 2>&1 | tee build.log
+        ./gradlew assembleDevelopmentDebug
     
     # https://github.com/android/nowinandroid/blob/main/.github/workflows/Build.yaml
     - name: Upload build outputs (APKs)
