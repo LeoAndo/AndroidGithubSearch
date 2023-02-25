@@ -9,44 +9,60 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    
     steps:
+    # https://github.com/styfle/cancel-workflow-action#usage
+    - name: Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@0.11.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+          
     - uses: actions/checkout@v3
+    
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+        
+    # - name: Grant execute permission for gradlew
+    #  run: chmod +x gradlew
+      
+    # https://github.com/ruby/setup-ruby#single-job
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6
+        ruby-version: '3.0'
         bundler-cache: true
+        
     - name: Install Danger
       run: |
-        gem install danger:8.4.2
+        gem install danger:9.2.0
         gem install danger-chikuwa
-    - name: Build
-      run: ./gradlew assembleDebug 2>&1 | tee build.log
+        
+    - name: Create local.properties
+      env:
+        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+      run: |
+        echo "GITHUB_ACCESS_TOKEN=$GITHUB_ACCESS_TOKEN" >> local.properties
+
+    - name: Build and check
+      run: |
+        ./gradlew lintDebug
+        ./gradlew testDebug
+        ./gradlew assembleDebug 2>&1 | tee build.log
       continue-on-error: true
+      
     - name: Run Danger
       run: danger --remove-previous-comments
       env:
         DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
+    
+    # https://github.com/actions/upload-artifact#usage
+    - name: Upload build outputs
+      uses: actions/upload-artifact@v3
       with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: test with Gradle
-      run: ./gradlew test
+        name: build-outputs
+        path: app/build/outputs/apk/**/*.apk
