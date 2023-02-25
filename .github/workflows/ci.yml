@@ -44,7 +44,7 @@ jobs:
         
     - name: Create local.properties
       env:
-        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "GITHUB_ACCESS_TOKEN=$GITHUB_ACCESS_TOKEN" >> local.properties
 
