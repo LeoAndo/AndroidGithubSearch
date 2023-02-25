@@ -19,12 +19,23 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: assembleDebug with Gradle
-      run: ./gradlew assembleDebug
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - name: Install Danger
+      run: |
+        gem install danger:8.4.2
+        gem install danger-chikuwa
+    - name: Build
+      run: ./gradlew assembleDebug 2>&1 | tee build.log
+      continue-on-error: true
+    - name: Run Danger
+      run: danger --remove-previous-comments
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: test with Gradle
       run: ./gradlew test
-      
-      
