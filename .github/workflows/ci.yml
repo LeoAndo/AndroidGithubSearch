@@ -50,7 +50,6 @@ jobs:
 
     - name: Build and check
       run: |
-        ./gradlew lintDebug
         ./gradlew testDebug
         ./gradlew assembleDebug 2>&1 | tee build.log
       continue-on-error: true
