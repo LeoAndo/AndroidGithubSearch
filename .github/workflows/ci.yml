@@ -24,19 +24,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-      
-    # https://github.com/ruby/setup-ruby#single-job
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0'
-        bundler-cache: true
-        
-    - name: Install Danger
-      run: |
-        gem install faraday-retry:2.1.1
-        gem install danger:9.2.0
-        gem install danger-chikuwa
         
     - name: Create local.properties
       env:
@@ -44,17 +31,15 @@ jobs:
       run: |
         echo "GITHUB_ACCESS_TOKEN=$GITHUB_ACCESS_TOKEN" >> local.properties
     
+    - name: Run lint for developmentDebug the variants.
+      run: ./gradlew lintDevelopmentDebug
+
     - name: Run unit tests for developmentDebug the variants.
       run: ./gradlew testDevelopmentDebugUnitTest
 
     - name: Build tasks (Assemble main outputs for developmentDebug the variants.)
       run: |
         ./gradlew assembleDevelopmentDebug 2>&1 | tee build.log
-      
-    - name: Run Danger
-      run: danger --remove-previous-comments
-      env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     # https://github.com/android/nowinandroid/blob/main/.github/workflows/Build.yaml
     - name: Upload build outputs (APKs)
