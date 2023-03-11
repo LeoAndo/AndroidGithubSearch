@@ -10,9 +10,7 @@ Native Androidで作るGithubリポジトリ検索アプリになります。<br
 - 動作OSバージョン: OS10.0以上
 
 # アプリ開発時の準備 (重要)
-秘匿情報の管理を`local.properties`で行っています。<br>
-[fine-grained personal access token作成手順](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#fine-grained-personal-access-token-%E3%81%AE%E4%BD%9C%E6%88%90) に沿ってaccess tokenを作成し、以下の11行目の通り設定値を追加してください。
-<img src= "https://user-images.githubusercontent.com/16476224/208823985-4d0fa8ec-ef81-48de-94e7-8552728e304a.png" />
+[Wiki](https://github.com/LeoAndo/AndroidGithubSearch/wiki/setup)にまとめています
 
 # デザイン面：アピールポイント
 - Themed Iconの適用
