@@ -18,8 +18,8 @@ android {
         applicationId "com.leoleo.androidgithubsearch"
         minSdk 29
         targetSdk 33
-        versionCode 109
-        versionName "1.0.9"
+        versionCode 110
+        versionName "1.1.0"
 
         testInstrumentationRunner "com.leoleo.androidgithubsearch.CustomTestRunner"
         vectorDrawables {
@@ -40,7 +40,17 @@ android {
     buildTypes {
         debug { signingConfig signingConfigs.debug }
         release {
-            signingConfig signingConfigs.release
+            // ローカル環境では署名なしのrelease ビルドも可能とする
+            if (rootProject.file('release.keystore').exists() &&
+                    localProperties['ANDROID_STORE_PASSWORD'] != null &&
+                    localProperties['ANDROID_KEY_ALIAS'] != null &&
+                    localProperties['ANDROID_KEY_PASSWORD'] != null
+            ) {
+                logger.warn("Use signingConfigs.release")
+                signingConfig signingConfigs.release
+            } else {
+                logger.warn("Not Use signingConfigs.release")
+            }
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
